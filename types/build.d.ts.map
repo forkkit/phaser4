@@ -1,1 +1,0 @@
-{"version":3,"file":"build.d.ts","sourceRoot":"","sources":["../src/Game.ts","../src/index.ts"],"names":[],"mappings":";IAAA,MAAM,CAAC,OAAO,OAAO,IAAI;QAID,QAAQ,iBAAiB;QAFtC,OAAO,EAAE,wBAAwB,GAAG,IAAI,CAAC;oBAE5B,QAAQ,iBAAiB;KAShD;;;ICbD,qBAAuB"}

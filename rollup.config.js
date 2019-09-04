@@ -1,6 +1,6 @@
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json';
-import {terser} from "rollup-plugin-terser";
+// import {terser} from "rollup-plugin-terser";
 
 export default {
  input: 'src/index.ts', // our source file
@@ -20,12 +20,14 @@ export default {
   }
  ],
  external: [
-  ...Object.keys(pkg.dependencies || {})
+  ...Object.keys(pkg.dependencies || {}),
+  ...Object.keys(pkg.peerDependencies || {})
  ],
  plugins: [
   typescript({
    typescript: require('typescript'),
+   useTsconfigDeclarationDir: true
   }),
-  terser() // minifies generated bundles
+  //terser() // minifies generated bundles
  ]
 };

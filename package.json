@@ -1,19 +1,22 @@
 {
   "name": "phaser4",
   "version": "0.0.1",
-  "description": "Phaser 4 Development",
-  "main": "index.js",
+  "description": "Phaser 4",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "browser": "dist/phaser.js",
+  "types": "types/index.d.ts",
+  "files":[ "dist" ],
   "scripts": {
-    "dev": "tsc -b src/",
-    "build": "rollup -c && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c",
+    "watch": "rollup -cw"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/phaserjs/phaser4.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Richard Davey",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/phaserjs/phaser4/issues"
   },

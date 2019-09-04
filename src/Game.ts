@@ -1,4 +1,4 @@
-export default class Game
+export class Game
 {
     public context: CanvasRenderingContext2D | null;
 
