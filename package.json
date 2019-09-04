@@ -1,14 +1,11 @@
 {
   "name": "phaser",
-  "version": "4.0.0-alpha.0",
+  "version": "4.0.0-alpha.1",
   "description": "A fast, free and fun HTML5 Game Framework for Desktop and Mobile web browsers.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "browser": "dist/phaser.js",
   "types": "types/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "pub": "npm publish --tag alpha",
     "build": "rollup -c",
