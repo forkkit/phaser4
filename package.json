@@ -1,7 +1,7 @@
 {
   "name": "phaser",
   "version": "4.0.0-alpha.0",
-  "description": "Phaser 4",
+  "description": "A fast, free and fun HTML5 Game Framework for Desktop and Mobile web browsers.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "browser": "dist/phaser.js",
@@ -18,12 +18,13 @@
     "type": "git",
     "url": "git+https://github.com/phaserjs/phaser4.git"
   },
-  "author": "Richard Davey",
+  "author": "Richard Davey <rich@photonstorm.com> (http://www.photonstorm.com)",
   "license": "MIT",
+  "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "bugs": {
     "url": "https://github.com/phaserjs/phaser4/issues"
   },
-  "homepage": "https://github.com/phaserjs/phaser4#readme",
+  "homepage": "https://phaser.io",
   "devDependencies": {
     "rollup": "^1.20.3",
     "rollup-plugin-terser": "^5.1.1",
