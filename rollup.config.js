@@ -3,7 +3,7 @@ import pkg from './package.json';
 // import {terser} from "rollup-plugin-terser";
 
 export default {
- input: 'src/index.ts', // our source file
+ input: 'src/index.ts',
  output: [
   {
    file: pkg.main,
@@ -11,12 +11,12 @@ export default {
   },
   {
    file: pkg.module,
-   format: 'es' // the preferred format
+   format: 'es'
   },
   {
    file: pkg.browser,
    format: 'iife',
-   name: 'Phaser' // the global which can be used in a browser
+   name: 'Phaser'
   }
  ],
  external: [

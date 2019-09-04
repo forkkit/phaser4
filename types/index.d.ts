@@ -1,7 +1,4 @@
-import { Game } from './Game';
-declare const _default: {
-    Version: string;
-    Game: typeof Game;
-};
-export default _default;
+export * from './Phaser';
+export * from './Game';
+export * from './TestTree';
 //# sourceMappingURL=index.d.ts.map

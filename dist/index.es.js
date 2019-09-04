@@ -1,19 +1,26 @@
-var Game = /** @class */ (function () {
-    function Game(canvas) {
-        this.canvas = canvas;
-        this.context = canvas.getContext('2d');
+class Game {
+    constructor(width = 800, height = 600) {
+        this.canvas = document.createElement('canvas');
+        this.canvas.width = width;
+        this.canvas.height = height;
+        document.body.appendChild(this.canvas);
+        this.context = this.canvas.getContext('2d');
         this.context.fillStyle = '#2d2d2d';
-        this.context.fillRect(0, 0, canvas.width, canvas.height);
-        this.context.fillStyle = '#00ff00';
-        this.context.fillText('Phaser 4', 10, 10);
+        this.context.fillRect(0, 0, width, height);
     }
-    return Game;
-}());
+    draw(text) {
+        this.context.fillStyle = '#ff0000';
+        this.context.fillText(text, 10, 40);
+        this.context.fillStyle = '#0000ff';
+        this.context.fillText(text, 10, 20);
+        this.context.fillStyle = '#ffff00';
+        this.context.fillText(text, 10, 60);
+    }
+}
 
-//  Phaser 4 Entry point
-var index = {
-    Version: '4.0.0',
-    Game: Game
-};
+function TestTree(name) {
+    console.log(name);
+}
+//# sourceMappingURL=TestTree.js.map
 
-export default index;
+export { Game, TestTree };
