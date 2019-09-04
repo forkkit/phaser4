@@ -1,13 +1,16 @@
 {
-  "name": "phaser4",
-  "version": "0.0.1",
+  "name": "phaser",
+  "version": "4.0.0-alpha.0",
   "description": "Phaser 4",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "browser": "dist/phaser.js",
   "types": "types/index.d.ts",
-  "files":[ "dist" ],
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "pub": "npm publish --tag alpha",
     "build": "rollup -c",
     "watch": "rollup -cw"
   },
@@ -21,7 +24,7 @@
     "url": "https://github.com/phaserjs/phaser4/issues"
   },
   "homepage": "https://github.com/phaserjs/phaser4#readme",
-  "dependencies": {
+  "devDependencies": {
     "rollup": "^1.20.3",
     "rollup-plugin-terser": "^5.1.1",
     "rollup-plugin-typescript2": "^0.24.0",
