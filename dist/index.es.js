@@ -11,5 +11,9 @@ var Game = /** @class */ (function () {
 }());
 
 //  Phaser 4 Entry point
+var index = {
+    Version: '4.0.0',
+    Game: Game
+};
 
-export default Game;
+export default index;

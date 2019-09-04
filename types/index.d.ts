@@ -1,3 +1,7 @@
 import { Game } from './Game';
-export default Game;
+declare const _default: {
+    Version: string;
+    Game: typeof Game;
+};
+export default _default;
 //# sourceMappingURL=index.d.ts.map

@@ -2,4 +2,7 @@
 
 import { Game } from './Game';
 
-export default Game;
+export default {
+    Version: '4.0.0',
+    Game
+}

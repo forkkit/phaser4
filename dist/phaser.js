@@ -14,7 +14,11 @@ var Phaser = (function () {
     }());
 
     //  Phaser 4 Entry point
+    var index = {
+        Version: '4.0.0',
+        Game: Game
+    };
 
-    return Game;
+    return index;
 
 }());
