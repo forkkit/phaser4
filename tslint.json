@@ -9,7 +9,14 @@
         "quotemark": false,
         "trailing-comma": false,
         "object-literal-sort-keys": false,
-        "one-line": false
+        "one-line": false,
+        "variable-name": {
+            "options": [
+                "allow-leading-underscore",
+                "check-format",
+                "ban-keywords"
+            ]
+        }
     },
     "rulesDirectory": []
 }

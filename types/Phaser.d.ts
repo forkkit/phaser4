@@ -1,9 +1,11 @@
 import { Game } from './Game';
-import { TestTree } from './TestTree';
+import { BaseLoader } from './loader/BaseLoader';
+import { Loader } from './loader/Loader';
 declare const _default: {
     Version: string;
     Game: typeof Game;
-    TestTree: typeof TestTree;
+    BaseLoader: typeof BaseLoader;
+    Loader: typeof Loader;
 };
 export default _default;
 //# sourceMappingURL=Phaser.d.ts.map

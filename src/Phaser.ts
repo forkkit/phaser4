@@ -1,8 +1,10 @@
 import { Game } from './Game';
-import { TestTree } from './TestTree';
+import { BaseLoader } from './loader/BaseLoader';
+import { Loader } from './loader/Loader';
 
 export default {
     Version: '4.0.0',
     Game,
-    TestTree
+    BaseLoader,
+    Loader
 };

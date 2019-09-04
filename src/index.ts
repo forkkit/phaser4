@@ -1,3 +1,5 @@
 export * from './Phaser';
 export * from './Game';
-export * from './TestTree';
+export * from './loader/Loader';
+export * from './loader/BaseLoader';
+export * from './loader/File';
