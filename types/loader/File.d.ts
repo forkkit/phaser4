@@ -19,6 +19,11 @@ export interface IFile {
     load: () => Promise<any>;
     resolve?: () => void;
     reject?: () => void;
+    onLoad: () => void;
+    onError: () => void;
+    onProcess: () => void;
+    onComplete: () => void;
+    onDestroy: () => void;
 }
 export declare function File(key: string, url: string, type: string): IFile;
 //# sourceMappingURL=File.d.ts.map

@@ -24,6 +24,11 @@ export interface IFile {
     load: () => Promise<any>;
     resolve?: () => void;
     reject?: () => void;
+    onLoad: () => void;
+    onError: () => void;
+    onProcess: () => void;
+    onComplete: () => void;
+    onDestroy: () => void;
 }
 
 export function File (key: string, url: string, type: string): IFile
@@ -39,6 +44,8 @@ export function File (key: string, url: string, type: string): IFile
 
         onStateChange (value: FileState)
         {
+            console.log('onStateChange', value);
+
             if (this.state !== value)
             {
                 this.state = value;
@@ -63,9 +70,47 @@ export function File (key: string, url: string, type: string): IFile
 
         load ()
         {
+            console.log('File.load', this.key);
+
             this.onStateChange(FileState.LOADING);
 
             return XHRLoader(this);
+        },
+
+        onLoad () {
+
+            //  If overridden it must set `state` to LOADED
+            this.onStateChange(FileState.LOADED);
+            this.onStateChange(FileState.COMPLETE);
+
+        },
+
+        onError () {
+
+            //  If overridden it must set `state` to FAILED
+            this.onStateChange(FileState.FAILED);
+
+        },
+
+        onProcess () {
+
+            //  If overridden it must set `state` to PROCESSING
+            this.onStateChange(FileState.PROCESSING);
+
+        },
+
+        onComplete () {
+
+            //  If overridden it must set `state` to COMPLETE
+            this.onStateChange(FileState.COMPLETE);
+
+        },
+
+        onDestroy () {
+
+            //  If overridden it must set `state` to DESTROYED
+            this.onStateChange(FileState.DESTROYED);
+
         }
 
     };

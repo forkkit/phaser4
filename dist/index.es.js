@@ -21,13 +21,15 @@ class Game {
 
 function XHRLoader(file) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', file.src, true);
+    xhr.open('GET', file.url, true);
     xhr.responseType = 'blob';
     return new Promise((resolve, reject) => {
         xhr.onload = () => {
+            file.onLoad(xhr);
             resolve(file);
         };
         xhr.onerror = () => {
+            file.onError(xhr);
             reject(file);
         };
         xhr.send();
@@ -55,6 +57,7 @@ function File(key, url, type) {
         data: null,
         state: FileState.PENDING,
         onStateChange(value) {
+            console.log('onStateChange', value);
             if (this.state !== value) {
                 this.state = value;
                 //  Loaded AND Processed
@@ -71,12 +74,33 @@ function File(key, url, type) {
             }
         },
         load() {
+            console.log('File.load', this.key);
             this.onStateChange(FileState.LOADING);
             return XHRLoader(this);
+        },
+        onLoad() {
+            //  If overridden it must set `state` to LOADED
+            this.onStateChange(FileState.LOADED);
+            this.onStateChange(FileState.COMPLETE);
+        },
+        onError() {
+            //  If overridden it must set `state` to FAILED
+            this.onStateChange(FileState.FAILED);
+        },
+        onProcess() {
+            //  If overridden it must set `state` to PROCESSING
+            this.onStateChange(FileState.PROCESSING);
+        },
+        onComplete() {
+            //  If overridden it must set `state` to COMPLETE
+            this.onStateChange(FileState.COMPLETE);
+        },
+        onDestroy() {
+            //  If overridden it must set `state` to DESTROYED
+            this.onStateChange(FileState.DESTROYED);
         }
     };
 }
-//# sourceMappingURL=File.js.map
 
 var LoaderState;
 (function (LoaderState) {
@@ -131,9 +155,11 @@ class BaseLoader {
         return (this.state === LoaderState.IDLE || this.state === LoaderState.COMPLETE);
     }
     addFile(key, url) {
+        console.log('addFile');
         const file = File(key, url, 'image');
         this.list.add(file);
         this.totalToLoad++;
+        console.log(file);
         return new Promise((resolve, reject) => {
             file.resolve = resolve;
             file.reject = reject;
@@ -179,7 +205,22 @@ class BaseLoader {
         }
     }
     nextFile(previousFile, success) {
-        //
+        console.log('nextFile', previousFile, success);
+        if (success) {
+            this.queue.add(previousFile);
+        }
+        else {
+            this._deleteQueue.add(previousFile);
+        }
+        this.inflight.delete(previousFile);
+        if (this.list.size > 0) {
+            console.log('nextFile - still something in the list');
+            this.checkLoadQueue();
+        }
+        else if (this.inflight.size === 0) {
+            console.log('nextFile calling finishedLoading');
+            this.loadComplete();
+        }
     }
     loadComplete() {
         this.list.clear();
@@ -201,5 +242,6 @@ class Loader extends BaseLoader {
         return this.addFile(key, url);
     }
 }
+//# sourceMappingURL=Loader.js.map
 
 export { BaseLoader, File, FileState, Game, Loader, LoaderState };

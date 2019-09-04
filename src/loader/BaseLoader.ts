@@ -80,11 +80,15 @@ export class BaseLoader
 
     public addFile (key: string, url: string): Promise<any>
     {
+        console.log('addFile');
+
         const file = File(key, url, 'image');
 
         this.list.add(file);
 
         this.totalToLoad++;
+
+        console.log(file);
 
         return new Promise(
             (resolve, reject) => {
@@ -157,7 +161,29 @@ export class BaseLoader
 
     private nextFile (previousFile, success)
     {
-        //
+        console.log('nextFile', previousFile, success);
+
+        if (success)
+        {
+            this.queue.add(previousFile);
+        }
+        else
+        {
+            this._deleteQueue.add(previousFile);
+        }
+
+        this.inflight.delete(previousFile);
+
+        if (this.list.size > 0)
+        {
+            console.log('nextFile - still something in the list');
+            this.checkLoadQueue();
+        }
+        else if (this.inflight.size === 0)
+        {
+            console.log('nextFile calling finishedLoading');
+            this.loadComplete();
+        }
     }
 
     private loadComplete ()

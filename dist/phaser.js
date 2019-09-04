@@ -24,13 +24,15 @@ var Phaser = (function (exports) {
 
     function XHRLoader(file) {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', file.src, true);
+        xhr.open('GET', file.url, true);
         xhr.responseType = 'blob';
         return new Promise((resolve, reject) => {
             xhr.onload = () => {
+                file.onLoad(xhr);
                 resolve(file);
             };
             xhr.onerror = () => {
+                file.onError(xhr);
                 reject(file);
             };
             xhr.send();
@@ -57,6 +59,7 @@ var Phaser = (function (exports) {
             data: null,
             state: exports.FileState.PENDING,
             onStateChange(value) {
+                console.log('onStateChange', value);
                 if (this.state !== value) {
                     this.state = value;
                     //  Loaded AND Processed
@@ -73,12 +76,33 @@ var Phaser = (function (exports) {
                 }
             },
             load() {
+                console.log('File.load', this.key);
                 this.onStateChange(exports.FileState.LOADING);
                 return XHRLoader(this);
+            },
+            onLoad() {
+                //  If overridden it must set `state` to LOADED
+                this.onStateChange(exports.FileState.LOADED);
+                this.onStateChange(exports.FileState.COMPLETE);
+            },
+            onError() {
+                //  If overridden it must set `state` to FAILED
+                this.onStateChange(exports.FileState.FAILED);
+            },
+            onProcess() {
+                //  If overridden it must set `state` to PROCESSING
+                this.onStateChange(exports.FileState.PROCESSING);
+            },
+            onComplete() {
+                //  If overridden it must set `state` to COMPLETE
+                this.onStateChange(exports.FileState.COMPLETE);
+            },
+            onDestroy() {
+                //  If overridden it must set `state` to DESTROYED
+                this.onStateChange(exports.FileState.DESTROYED);
             }
         };
     }
-    //# sourceMappingURL=File.js.map
 
     (function (LoaderState) {
         LoaderState[LoaderState["IDLE"] = 0] = "IDLE";
@@ -132,9 +156,11 @@ var Phaser = (function (exports) {
             return (this.state === exports.LoaderState.IDLE || this.state === exports.LoaderState.COMPLETE);
         }
         addFile(key, url) {
+            console.log('addFile');
             const file = File(key, url, 'image');
             this.list.add(file);
             this.totalToLoad++;
+            console.log(file);
             return new Promise((resolve, reject) => {
                 file.resolve = resolve;
                 file.reject = reject;
@@ -180,7 +206,22 @@ var Phaser = (function (exports) {
             }
         }
         nextFile(previousFile, success) {
-            //
+            console.log('nextFile', previousFile, success);
+            if (success) {
+                this.queue.add(previousFile);
+            }
+            else {
+                this._deleteQueue.add(previousFile);
+            }
+            this.inflight.delete(previousFile);
+            if (this.list.size > 0) {
+                console.log('nextFile - still something in the list');
+                this.checkLoadQueue();
+            }
+            else if (this.inflight.size === 0) {
+                console.log('nextFile calling finishedLoading');
+                this.loadComplete();
+            }
         }
         loadComplete() {
             this.list.clear();
@@ -202,6 +243,7 @@ var Phaser = (function (exports) {
             return this.addFile(key, url);
         }
     }
+    //# sourceMappingURL=Loader.js.map
 
     exports.BaseLoader = BaseLoader;
     exports.File = File;

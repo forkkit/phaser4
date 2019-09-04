@@ -2,7 +2,7 @@ export function XHRLoader (file): Promise<any>
 {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('GET', file.src, true);
+    xhr.open('GET', file.url, true);
 
     xhr.responseType = 'blob';
 
@@ -10,10 +10,12 @@ export function XHRLoader (file): Promise<any>
         (resolve, reject) => {
 
             xhr.onload = () => {
+                file.onLoad(xhr);
                 resolve(file);
             };
 
             xhr.onerror = () => {
+                file.onError(xhr);
                 reject(file);
             };
 

@@ -16,7 +16,8 @@
                 "check-format",
                 "ban-keywords"
             ]
-        }
+        },
+        "no-console": false
     },
     "rulesDirectory": []
 }
