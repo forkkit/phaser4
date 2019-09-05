@@ -157,7 +157,10 @@ export function File (key: string, url: string, type: string): IFile
 
             this.state = FileState.ERRORED;
 
-            this.fileReject(this);
+            if (this.fileReject)
+            {
+                this.fileReject(this);
+            }
         },
 
         onProgress (event: ProgressEvent)
@@ -189,9 +192,18 @@ export function File (key: string, url: string, type: string): IFile
 
         onComplete ()
         {
+            console.log('onComplete!');
+            
             this.state = FileState.COMPLETE;
 
-            this.fileResolve(this);
+            if (this.fileResolve)
+            {
+                this.fileResolve(this);
+            }
+            else if (this.loaderResolve)
+            {
+                this.loaderResolve(this);
+            }
         },
 
         onDestroy ()

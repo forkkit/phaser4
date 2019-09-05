@@ -170,7 +170,9 @@ function File(key, url, type) {
         onError(event) {
             console.log('onError');
             this.state = FileState.ERRORED;
-            this.fileReject(this);
+            if (this.fileReject) {
+                this.fileReject(this);
+            }
         },
         onProgress(event) {
             console.log('onProgress');
@@ -189,8 +191,14 @@ function File(key, url, type) {
             });
         },
         onComplete() {
+            console.log('onComplete!');
             this.state = FileState.COMPLETE;
-            this.fileResolve(this);
+            if (this.fileResolve) {
+                this.fileResolve(this);
+            }
+            else if (this.loaderResolve) {
+                this.loaderResolve(this);
+            }
         },
         onDestroy() {
             this.state = FileState.DESTROYED;
@@ -391,5 +399,6 @@ class Loader extends BaseLoader {
         return this.addFile(ImageFile(key, url));
     }
 }
+//# sourceMappingURL=Loader.js.map
 
-export { BaseLoader, File, FileState, Game, Loader, LoaderState };
+export { BaseLoader, File, FileState, Game, ImageFile, Loader, LoaderState };

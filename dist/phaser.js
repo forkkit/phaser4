@@ -172,7 +172,9 @@ var Phaser = (function (exports) {
             onError(event) {
                 console.log('onError');
                 this.state = exports.FileState.ERRORED;
-                this.fileReject(this);
+                if (this.fileReject) {
+                    this.fileReject(this);
+                }
             },
             onProgress(event) {
                 console.log('onProgress');
@@ -191,8 +193,14 @@ var Phaser = (function (exports) {
                 });
             },
             onComplete() {
+                console.log('onComplete!');
                 this.state = exports.FileState.COMPLETE;
-                this.fileResolve(this);
+                if (this.fileResolve) {
+                    this.fileResolve(this);
+                }
+                else if (this.loaderResolve) {
+                    this.loaderResolve(this);
+                }
             },
             onDestroy() {
                 this.state = exports.FileState.DESTROYED;
@@ -392,10 +400,12 @@ var Phaser = (function (exports) {
             return this.addFile(ImageFile(key, url));
         }
     }
+    //# sourceMappingURL=Loader.js.map
 
     exports.BaseLoader = BaseLoader;
     exports.File = File;
     exports.Game = Game;
+    exports.ImageFile = ImageFile;
     exports.Loader = Loader;
 
     return exports;
