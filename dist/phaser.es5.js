@@ -25,6 +25,7 @@ var Game = /** @class */ (function () {
     };
     return Game;
 }());
+//# sourceMappingURL=Game.js.map
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -92,6 +93,7 @@ var BaseLoaderState;
     BaseLoaderState[BaseLoaderState["SHUTDOWN"] = 4] = "SHUTDOWN";
     BaseLoaderState[BaseLoaderState["DESTROYED"] = 5] = "DESTROYED";
 })(BaseLoaderState || (BaseLoaderState = {}));
+//# sourceMappingURL=BaseLoaderState.js.map
 
 var FileState;
 (function (FileState) {
@@ -107,6 +109,7 @@ var FileState;
     FileState[FileState["TIMED_OUT"] = 9] = "TIMED_OUT";
     FileState[FileState["ABORTED"] = 10] = "ABORTED";
 })(FileState || (FileState = {}));
+//# sourceMappingURL=FileState.js.map
 
 var BaseLoader = /** @class */ (function () {
     function BaseLoader() {
@@ -254,6 +257,7 @@ var BaseLoader = /** @class */ (function () {
     };
     return BaseLoader;
 }());
+//# sourceMappingURL=BaseLoader.js.map
 
 function XHRLoader(file) {
     var e_1, _a;
@@ -333,6 +337,7 @@ function XHRLoader(file) {
     //  ArrayBuffer, Blob, or Document (depending on what was set for responseType.)
     xhr.send();
 }
+//# sourceMappingURL=XHRLoader.js.map
 
 function XHRSettings(config) {
     // Before sending a request, set the xhr.responseType to "text",
@@ -356,6 +361,7 @@ function XHRSettings(config) {
         overrideMimeType: undefined
     };
 }
+//# sourceMappingURL=XHRSettings.js.map
 
 function File(key, url, type) {
     return {
@@ -448,6 +454,7 @@ function File(key, url, type) {
         }
     };
 }
+//# sourceMappingURL=File.js.map
 
 function ImageFile(key, url) {
     if (!url) {
@@ -493,6 +500,7 @@ function ImageFile(key, url) {
     };
     return file;
 }
+//# sourceMappingURL=ImageFile.js.map
 
 var LoaderPlugin = /** @class */ (function (_super) {
     __extends(LoaderPlugin, _super);
@@ -505,6 +513,7 @@ var LoaderPlugin = /** @class */ (function (_super) {
     };
     return LoaderPlugin;
 }(BaseLoader));
+//# sourceMappingURL=LoaderPlugin.js.map
 
 /**
  * @namespace Phaser.Loader
@@ -533,6 +542,10 @@ var Loader = {
         ImageFile: ImageFile
     }
 };
+//# sourceMappingURL=index.js.map
 
-export { Game, Loader };
+var VERSION = '4.0.0-alpha.3';
+//# sourceMappingURL=Version.js.map
+
+export { Game, Loader, VERSION };
 //# sourceMappingURL=phaser.es5.js.map

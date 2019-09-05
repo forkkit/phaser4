@@ -11,12 +11,10 @@
       "allowSyntheticDefaultImports": true,
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
-      "downlevelIteration": true,
-      "rootDir": "./src",
-      "outDir": "./dist/lib"
+      "downlevelIteration": true
     },
     "include": [
       "src/**/*"
     ],
-    "exclude": ["node_modules"]
+    "exclude": [ "node_modules" ]
 }

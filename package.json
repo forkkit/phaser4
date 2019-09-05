@@ -5,6 +5,8 @@
   "main": "dist/phaser.umd.js",
   "module": "dist/phaser.es5.js",
   "browser": "dist/phaser.js",
+  "types": "types/index.d.ts",
+  "typings": "types/index.d.ts",
   "scripts": {
     "pub": "npm publish --tag alpha",
     "build": "rollup -c",
