@@ -208,6 +208,7 @@ function File(key, url, type) {
         }
     };
 }
+//# sourceMappingURL=File.js.map
 
 (function (LoaderState) {
     LoaderState[LoaderState["IDLE"] = 0] = "IDLE";

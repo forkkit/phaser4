@@ -205,6 +205,7 @@ function File(key, url, type) {
         }
     };
 }
+//# sourceMappingURL=File.js.map
 
 var LoaderState;
 (function (LoaderState) {

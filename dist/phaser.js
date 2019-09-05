@@ -207,6 +207,7 @@ var Phaser = (function (exports) {
             }
         };
     }
+    //# sourceMappingURL=File.js.map
 
     (function (LoaderState) {
         LoaderState[LoaderState["IDLE"] = 0] = "IDLE";
