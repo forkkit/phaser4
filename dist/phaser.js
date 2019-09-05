@@ -338,7 +338,6 @@ var Phaser = (function (exports) {
             // this._deleteQueue.clear();
         }
     }
-    //# sourceMappingURL=BaseLoader.js.map
 
     function ImageFile(key, url) {
         if (!url) {
@@ -384,7 +383,6 @@ var Phaser = (function (exports) {
         };
         return file;
     }
-    //# sourceMappingURL=ImageFile.js.map
 
     class Loader extends BaseLoader {
         constructor() {
@@ -394,7 +392,6 @@ var Phaser = (function (exports) {
             return this.addFile(ImageFile(key, url));
         }
     }
-    //# sourceMappingURL=Loader.js.map
 
     exports.BaseLoader = BaseLoader;
     exports.File = File;

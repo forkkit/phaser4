@@ -339,7 +339,6 @@ class BaseLoader {
         // this._deleteQueue.clear();
     }
 }
-//# sourceMappingURL=BaseLoader.js.map
 
 function ImageFile(key, url) {
     if (!url) {
@@ -385,7 +384,6 @@ function ImageFile(key, url) {
     };
     return file;
 }
-//# sourceMappingURL=ImageFile.js.map
 
 class Loader extends BaseLoader {
     constructor() {
@@ -395,7 +393,6 @@ class Loader extends BaseLoader {
         return this.addFile(ImageFile(key, url));
     }
 }
-//# sourceMappingURL=Loader.js.map
 
 exports.BaseLoader = BaseLoader;
 exports.File = File;
