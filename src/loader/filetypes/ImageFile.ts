@@ -1,4 +1,5 @@
-import { File, FileState, IFile } from '../File';
+import { File, IFile } from '../File';
+import { FileState } from '../FileState';
 
 export function ImageFile (key: string, url?: string): IFile
 {

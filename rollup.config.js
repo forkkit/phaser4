@@ -1,33 +1,31 @@
 import typescript from 'rollup-plugin-typescript2';
-import pkg from './package.json';
+import commonjs from 'rollup-plugin-commonjs';
+import json from 'rollup-plugin-json';
 // import {terser} from "rollup-plugin-terser";
 
+const pkg = require('./package.json');
+
 export default {
- input: 'src/index.ts',
- output: [
-  {
-   file: pkg.main,
-   format: 'cjs'
-  },
-  {
-   file: pkg.module,
-   format: 'es'
-  },
-  {
-   file: pkg.browser,
-   format: 'iife',
-   name: 'Phaser'
-  }
- ],
- external: [
-  ...Object.keys(pkg.dependencies || {}),
-  ...Object.keys(pkg.peerDependencies || {})
- ],
- plugins: [
-  typescript({
-   typescript: require('typescript'),
-   useTsconfigDeclarationDir: true
-  }),
-  //terser() // minifies generated bundles
- ]
+    input: 'src/index.ts',
+    output: [
+        { file: pkg.main, name: 'phaser', format: 'umd', sourcemap: true },
+        { file: pkg.module, format: 'es', sourcemap: true },
+        { file: pkg.browser, name: 'Phaser', format: 'iife', sourcemap: true }
+    ],
+    watch: {
+        include: 'src/**'
+    },
+    // external: [
+    //     ...Object.keys(pkg.dependencies || {}),
+    //     ...Object.keys(pkg.peerDependencies || {})
+    // ],
+    plugins: [
+        json(),
+        typescript({
+            typescript: require('typescript'),
+            useTsconfigDeclarationDir: true
+        }),
+        commonjs()
+        //terser()
+    ]
 };

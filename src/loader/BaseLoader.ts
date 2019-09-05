@@ -1,13 +1,6 @@
-import { File, FileState, IFile } from './File';
-
-export enum LoaderState {
-    IDLE = 0,
-    LOADING = 1,
-    PROCESSING = 2,
-    COMPLETE = 3,
-    SHUTDOWN = 4,
-    DESTROYED = 5
-}
+import { BaseLoaderState } from './BaseLoaderState';
+import { IFile } from './File';
+import { FileState } from './FileState';
 
 export class BaseLoader
 {
@@ -18,7 +11,7 @@ export class BaseLoader
     public maxParallelDownloads: number = 32;
     public crossOrigin: string = '';
 
-    public state: LoaderState = LoaderState.IDLE;
+    public state: BaseLoaderState = BaseLoaderState.IDLE;
 
     public progress: number = 0;
 
@@ -34,7 +27,7 @@ export class BaseLoader
 
     constructor ()
     {
-        this.state = LoaderState.IDLE;
+        this.state = BaseLoaderState.IDLE;
     }
 
     public setBaseURL (value: string = '')
@@ -70,12 +63,12 @@ export class BaseLoader
 
     public isLoading (): boolean
     {
-        return (this.state === LoaderState.LOADING || this.state === LoaderState.PROCESSING);
+        return (this.state === BaseLoaderState.LOADING || this.state === BaseLoaderState.PROCESSING);
     }
 
     public isReady (): boolean
     {
-        return (this.state === LoaderState.IDLE || this.state === LoaderState.COMPLETE);
+        return (this.state === BaseLoaderState.IDLE || this.state === BaseLoaderState.COMPLETE);
     }
 
     public addFile (file: IFile): Promise<any>
@@ -117,7 +110,7 @@ export class BaseLoader
         }
         else
         {
-            this.state = LoaderState.LOADING;
+            this.state = BaseLoaderState.LOADING;
 
             this.inflight.clear();
             this.queue.clear();
@@ -207,7 +200,7 @@ export class BaseLoader
 
         this.progress = 1;
 
-        this.state = LoaderState.COMPLETE;
+        this.state = BaseLoaderState.COMPLETE;
 
         //  Call 'destroy' on each file ready for deletion
         // this._deleteQueue.iterateLocal('destroy');

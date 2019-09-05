@@ -1,7 +1,3 @@
-export * from './Phaser';
 export * from './Game';
-export * from './loader/BaseLoader';
-export * from './loader/File';
-export * from './loader/Loader';
-export * from './loader/filetypes/ImageFile';
+export * from './loader/index';
 //# sourceMappingURL=index.d.ts.map

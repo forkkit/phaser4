@@ -1,6 +1,10 @@
-export * from './Phaser';
-export * from './Game';
-export * from './loader/BaseLoader';
-export * from './loader/File';
-export * from './loader/Loader';
-export * from './loader/filetypes/ImageFile';
+ export * from './Game';
+ export * from './loader/index';
+
+// import { Game } from './Game';
+// import { Loader } from './loader/index';
+
+// export const Phaser = {
+//     Game,
+//     Loader
+// };

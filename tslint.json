@@ -6,15 +6,16 @@
     "jsRules": {},
     "rules": {
         "space-before-function-paren": true,
-        "quotemark": false,
+        "quotemark": [ true, "single" ],
         "trailing-comma": false,
         "object-literal-sort-keys": false,
         "one-line": false,
         "variable-name": {
             "options": [
-                "allow-leading-underscore",
+                "ban-keywords",
                 "check-format",
-                "ban-keywords"
+                "allow-leading-underscore",
+                "allow-pascal-case"
             ]
         },
         "no-console": false,
@@ -22,7 +23,8 @@
         "no-trailing-whitespace": [ true, "ignore-comments", "ignore-blank-lines" ],
         "newline-before-return": true,
         "indent": [ true, "spaces", 4 ],
-        "semicolon": [ true, "always" ]
+        "semicolon": [ true, "always" ],
+        "no-namespace": false
     },
     "rulesDirectory": []
 }

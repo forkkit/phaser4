@@ -1,11 +1,10 @@
 {
   "name": "phaser",
-  "version": "4.0.0-alpha.2",
+  "version": "4.0.0-alpha.3",
   "description": "A fast, free and fun HTML5 Game Framework for Desktop and Mobile web browsers.",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "main": "dist/phaser.umd.js",
+  "module": "dist/phaser.es5.js",
   "browser": "dist/phaser.js",
-  "types": "types/index.d.ts",
   "scripts": {
     "pub": "npm publish --tag alpha",
     "build": "rollup -c",
@@ -24,6 +23,8 @@
   "homepage": "https://phaser.io",
   "devDependencies": {
     "rollup": "^1.20.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-terser": "^5.1.1",
     "rollup-plugin-typescript2": "^0.24.0",
     "tslint": "^5.19.0",

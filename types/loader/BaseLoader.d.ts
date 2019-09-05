@@ -1,12 +1,5 @@
+import { BaseLoaderState } from './BaseLoaderState';
 import { IFile } from './File';
-export declare enum LoaderState {
-    IDLE = 0,
-    LOADING = 1,
-    PROCESSING = 2,
-    COMPLETE = 3,
-    SHUTDOWN = 4,
-    DESTROYED = 5
-}
 export declare class BaseLoader {
     fileGroup: string;
     prefix: string;
@@ -14,7 +7,7 @@ export declare class BaseLoader {
     path: string;
     maxParallelDownloads: number;
     crossOrigin: string;
-    state: LoaderState;
+    state: BaseLoaderState;
     progress: number;
     totalToLoad: number;
     totalFailed: number;

@@ -1,7 +1,7 @@
-import { BaseLoader } from "./BaseLoader";
-import { ImageFile } from "./filetypes/ImageFile";
+import { BaseLoader } from './BaseLoader';
+import { ImageFile } from './filetypes/ImageFile';
 
-export class Loader extends BaseLoader
+export class LoaderPlugin extends BaseLoader
 {
     constructor ()
     {

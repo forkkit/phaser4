@@ -1,7 +1,7 @@
 export class Game
 {
     public canvas: HTMLCanvasElement;
-    public context: CanvasRenderingContext2D | null;
+    public context: CanvasRenderingContext2D;
 
     constructor (width: number = 800, height: number = 600)
     {
