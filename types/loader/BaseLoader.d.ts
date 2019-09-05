@@ -29,8 +29,9 @@ export declare class BaseLoader {
     setFileGroup(name?: string): this;
     isLoading(): boolean;
     isReady(): boolean;
-    addFile(key: string, url: string): Promise<any>;
+    addFile(file: IFile): Promise<any>;
     start(): void;
+    private getURL;
     private updateProgress;
     private checkLoadQueue;
     private nextFile;

@@ -78,11 +78,11 @@ export class BaseLoader
         return (this.state === LoaderState.IDLE || this.state === LoaderState.COMPLETE);
     }
 
-    public addFile (key: string, url: string): Promise<any>
+    public addFile (file: IFile): Promise<any>
     {
         console.log('addFile');
 
-        const file = File(key, url, 'image');
+        this.getURL(file);
 
         this.list.add(file);
 
@@ -92,8 +92,8 @@ export class BaseLoader
 
         return new Promise(
             (resolve, reject) => {
-                file.resolve = resolve;
-                file.reject = reject;
+                file.fileResolve = resolve;
+                file.fileReject = reject;
             }
         );
     }
@@ -126,6 +126,18 @@ export class BaseLoader
             this.updateProgress();
 
             this.checkLoadQueue();
+        }
+    }
+
+    private getURL (file: IFile)
+    {
+        if (file.url.match(/^(?:blob:|data:|http:\/\/|https:\/\/|\/\/)/))
+        {
+            return file;
+        }
+        else
+        {
+            file.url = this.baseURL + this.path + file.url;
         }
     }
 
@@ -190,7 +202,8 @@ export class BaseLoader
     {
         this.list.clear();
         this.inflight.clear();
-        this.queue.clear();
+
+        // this.queue.clear();
 
         this.progress = 1;
 

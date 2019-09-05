@@ -18,6 +18,11 @@ export class Game
         this.context.fillRect(0, 0, width, height);
     }
 
+    public drawImage (image: CanvasImageSource, x: number = 0, y: number = 0)
+    {
+        this.context.drawImage(image, x, y);
+    }
+
     public draw (text: string)
     {
         this.context.fillStyle = '#ff0000';

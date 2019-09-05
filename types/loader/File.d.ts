@@ -1,3 +1,4 @@
+import { IXHRSettings } from './XHRSettings';
 export declare enum FileState {
     PENDING = 0,
     LOADING = 1,
@@ -7,21 +8,35 @@ export declare enum FileState {
     ERRORED = 5,
     COMPLETE = 6,
     DESTROYED = 7,
-    POPULATED = 8
+    POPULATED = 8,
+    TIMED_OUT = 9,
+    ABORTED = 10
 }
 export interface IFile {
     key: string;
     url: string;
     type: string;
+    bytesLoaded: number;
+    bytesTotal: number;
+    percentComplete: number;
+    xhrSettings: IXHRSettings;
+    xhrLoader?: XMLHttpRequest;
     data: any;
     state: FileState;
-    onStateChange: (value: FileState) => void;
     load: () => Promise<any>;
-    resolve?: () => void;
-    reject?: () => void;
-    onLoad: () => void;
-    onError: () => void;
-    onProcess: () => void;
+    resetXHR?: () => void;
+    fileResolve?: () => void;
+    fileReject?: () => void;
+    loaderResolve?: () => void;
+    loaderReject?: () => void;
+    onLoadStart: (event: ProgressEvent) => void;
+    onLoad: (event: ProgressEvent) => void;
+    onLoadEnd: (event: ProgressEvent) => void;
+    onProgress: (event: ProgressEvent) => void;
+    onTimeout: (event: ProgressEvent) => void;
+    onAbort: (event: ProgressEvent) => void;
+    onError: (event: ProgressEvent) => void;
+    onProcess: () => Promise<any>;
     onComplete: () => void;
     onDestroy: () => void;
 }

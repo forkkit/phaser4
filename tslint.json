@@ -17,7 +17,12 @@
                 "ban-keywords"
             ]
         },
-        "no-console": false
+        "no-console": false,
+        "max-line-length": false,
+        "no-trailing-whitespace": [ true, "ignore-comments", "ignore-blank-lines" ],
+        "newline-before-return": true,
+        "indent": [ true, "spaces", 4 ],
+        "semicolon": [ true, "always" ]
     },
     "rulesDirectory": []
 }

@@ -1,2 +1,3 @@
-export declare function XHRLoader(file: any): Promise<any>;
+import { IFile } from './File';
+export declare function XHRLoader(file: IFile): void;
 //# sourceMappingURL=XHRLoader.d.ts.map

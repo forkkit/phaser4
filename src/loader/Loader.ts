@@ -1,4 +1,5 @@
 import { BaseLoader } from "./BaseLoader";
+import { ImageFile } from "./filetypes/ImageFile";
 
 export class Loader extends BaseLoader
 {
@@ -9,6 +10,6 @@ export class Loader extends BaseLoader
 
     public image (key: string, url: string = ''): Promise<any>
     {
-        return this.addFile(key, url);
+        return this.addFile(ImageFile(key, url));
     }
 }

@@ -12,6 +12,9 @@ class Game {
         this.context.fillStyle = '#2d2d2d';
         this.context.fillRect(0, 0, width, height);
     }
+    drawImage(image, x = 0, y = 0) {
+        this.context.drawImage(image, x, y);
+    }
     draw(text) {
         this.context.fillStyle = '#ff0000';
         this.context.fillText(text, 10, 40);
@@ -25,21 +28,83 @@ class Game {
 
 function XHRLoader(file) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', file.url, true);
-    xhr.responseType = 'blob';
-    return new Promise((resolve, reject) => {
-        xhr.onload = () => {
-            file.onLoad(xhr);
-            resolve(file);
-        };
-        xhr.onerror = () => {
-            file.onError(xhr);
-            reject(file);
-        };
-        xhr.send();
-    });
+    file.xhrLoader = xhr;
+    const config = file.xhrSettings;
+    xhr.open('GET', file.url, config.async, config.username, config.password);
+    xhr.responseType = config.responseType;
+    xhr.timeout = config.timeout;
+    xhr.setRequestHeader('X-Requested-With', config.requestedWith);
+    if (config.header && config.headerValue) {
+        xhr.setRequestHeader(config.header, config.headerValue);
+    }
+    if (config.overrideMimeType) {
+        xhr.overrideMimeType(config.overrideMimeType);
+    }
+    const onLoadStart = (event) => file.onLoadStart(event);
+    const onLoad = (event) => file.onLoad(event);
+    const onLoadEnd = (event) => file.onLoadEnd(event);
+    const onProgress = (event) => file.onProgress(event);
+    const onTimeout = (event) => file.onTimeout(event);
+    const onAbort = (event) => file.onAbort(event);
+    const onError = (event) => file.onError(event);
+    const eventMap = new Map([
+        ['loadstart', onLoadStart],
+        ['load', onLoad],
+        ['loadend', onLoadEnd],
+        ['progress', onProgress],
+        ['timeout', onTimeout],
+        ['abort', onAbort],
+        ['error', onError]
+    ]);
+    for (const [key, value] of eventMap) {
+        xhr.addEventListener(key, value);
+    }
+    file.resetXHR = () => {
+        for (const [key, value] of eventMap) {
+            xhr.removeEventListener(key, value);
+        }
+        // xhr.removeEventListener('loadstart', onLoadStart);
+        // xhr.removeEventListener('load', onLoad);
+        // xhr.removeEventListener('loadend', onLoadEnd);
+        // xhr.removeEventListener('progress', onProgress);
+        // xhr.removeEventListener('timeout', onTimeout);
+        // xhr.removeEventListener('abort', onAbort);
+        // xhr.removeEventListener('error', onError);
+    };
+    // xhr.addEventListener('loadstart', onLoadStart);
+    // xhr.addEventListener('load', onLoad);
+    // xhr.addEventListener('loadend', onLoadEnd);
+    // xhr.addEventListener('progress', onProgress);
+    // xhr.addEventListener('timeout', onTimeout);
+    // xhr.addEventListener('abort', onAbort);
+    // xhr.addEventListener('error', onError);
+    //  After a successful request, the xhr.response property will contain the requested data as a DOMString,
+    //  ArrayBuffer, Blob, or Document (depending on what was set for responseType.)
+    xhr.send();
 }
-//# sourceMappingURL=XHRLoader.js.map
+
+function XHRSettings(config = { responseType: 'blob', async: true, username: '', password: '', timeout: 0 }) {
+    // Before sending a request, set the xhr.responseType to "text",
+    // "arraybuffer", "blob", or "document", depending on your data needs.
+    // Note, setting xhr.responseType = '' (or omitting) will default the response to "text".
+    return {
+        //  Ignored by the Loader, only used by File.
+        responseType: config.responseType,
+        async: config.async,
+        //  credentials
+        username: config.username,
+        password: config.password,
+        //  timeout in ms (0 = no timeout)
+        timeout: config.timeout,
+        //  setRequestHeader
+        header: undefined,
+        headerValue: undefined,
+        requestedWith: 'XMLHttpRequest',
+        //  overrideMimeType
+        overrideMimeType: undefined
+    };
+}
+//# sourceMappingURL=XHRSettings.js.map
 
 (function (FileState) {
     FileState[FileState["PENDING"] = 0] = "PENDING";
@@ -51,56 +116,87 @@ function XHRLoader(file) {
     FileState[FileState["COMPLETE"] = 6] = "COMPLETE";
     FileState[FileState["DESTROYED"] = 7] = "DESTROYED";
     FileState[FileState["POPULATED"] = 8] = "POPULATED";
+    FileState[FileState["TIMED_OUT"] = 9] = "TIMED_OUT";
+    FileState[FileState["ABORTED"] = 10] = "ABORTED";
 })(exports.FileState || (exports.FileState = {}));
 function File(key, url, type) {
     return {
         key,
         url,
         type,
+        xhrLoader: undefined,
+        xhrSettings: XHRSettings(),
         data: null,
         state: exports.FileState.PENDING,
-        onStateChange(value) {
-            console.log('onStateChange', value);
-            if (this.state !== value) {
-                this.state = value;
-                //  Loaded AND Processed
-                if (value === exports.FileState.COMPLETE) {
-                    if (this.resolve) {
-                        this.resolve(this);
-                    }
-                }
-                else if (value === exports.FileState.FAILED) {
-                    if (this.reject) {
-                        this.reject(this);
-                    }
-                }
-            }
-        },
+        bytesLoaded: 0,
+        bytesTotal: 0,
+        percentComplete: 0,
         load() {
             console.log('File.load', this.key);
-            this.onStateChange(exports.FileState.LOADING);
-            return XHRLoader(this);
+            this.state = exports.FileState.PENDING;
+            XHRLoader(this);
+            return new Promise((resolve, reject) => {
+                this.loaderResolve = resolve;
+                this.loaderReject = reject;
+            });
         },
-        onLoad() {
-            //  If overridden it must set `state` to LOADED
-            this.onStateChange(exports.FileState.LOADED);
-            this.onStateChange(exports.FileState.COMPLETE);
+        onLoadStart(event) {
+            console.log('onLoadStart');
+            this.state = exports.FileState.LOADING;
         },
-        onError() {
-            //  If overridden it must set `state` to FAILED
-            this.onStateChange(exports.FileState.FAILED);
+        onLoad(event) {
+            console.log('onLoad');
+            const xhr = this.xhrLoader;
+            const localFileOk = ((xhr.responseURL && xhr.responseURL.indexOf('file://') === 0 && xhr.status === 0));
+            let success = !(event.target && xhr.status !== 200) || localFileOk;
+            //  Handle HTTP status codes of 4xx and 5xx as errors, even if xhr.onerror was not called.
+            if (xhr.readyState === 4 && xhr.status >= 400 && xhr.status <= 599) {
+                success = false;
+            }
+            this.onProcess()
+                .then(() => this.onComplete())
+                .catch(() => this.onError());
+        },
+        onLoadEnd(event) {
+            console.log('onLoadEnd');
+            this.resetXHR();
+            this.state = exports.FileState.LOADED;
+        },
+        onTimeout(event) {
+            console.log('onTimeout');
+            this.state = exports.FileState.TIMED_OUT;
+        },
+        onAbort(event) {
+            console.log('onAbort');
+            this.state = exports.FileState.ABORTED;
+        },
+        onError(event) {
+            console.log('onError');
+            this.state = exports.FileState.ERRORED;
+            this.fileReject(this);
+        },
+        onProgress(event) {
+            console.log('onProgress');
+            if (event.lengthComputable) {
+                this.bytesLoaded = event.loaded;
+                this.bytesTotal = event.total;
+                this.percentComplete = Math.min((event.loaded / event.total), 1);
+                console.log(this.percentComplete, '%');
+            }
         },
         onProcess() {
-            //  If overridden it must set `state` to PROCESSING
-            this.onStateChange(exports.FileState.PROCESSING);
+            console.log('File.onProcess');
+            this.state = exports.FileState.PROCESSING;
+            return new Promise((resolve, reject) => {
+                resolve();
+            });
         },
         onComplete() {
-            //  If overridden it must set `state` to COMPLETE
-            this.onStateChange(exports.FileState.COMPLETE);
+            this.state = exports.FileState.COMPLETE;
+            this.fileResolve(this);
         },
         onDestroy() {
-            //  If overridden it must set `state` to DESTROYED
-            this.onStateChange(exports.FileState.DESTROYED);
+            this.state = exports.FileState.DESTROYED;
         }
     };
 }
@@ -156,15 +252,15 @@ class BaseLoader {
     isReady() {
         return (this.state === exports.LoaderState.IDLE || this.state === exports.LoaderState.COMPLETE);
     }
-    addFile(key, url) {
+    addFile(file) {
         console.log('addFile');
-        const file = File(key, url, 'image');
+        this.getURL(file);
         this.list.add(file);
         this.totalToLoad++;
         console.log(file);
         return new Promise((resolve, reject) => {
-            file.resolve = resolve;
-            file.reject = reject;
+            file.fileResolve = resolve;
+            file.fileReject = reject;
         });
     }
     start() {
@@ -185,6 +281,14 @@ class BaseLoader {
             this._deleteQueue.clear();
             this.updateProgress();
             this.checkLoadQueue();
+        }
+    }
+    getURL(file) {
+        if (file.url.match(/^(?:blob:|data:|http:\/\/|https:\/\/|\/\/)/)) {
+            return file;
+        }
+        else {
+            file.url = this.baseURL + this.path + file.url;
         }
     }
     updateProgress() {
@@ -227,7 +331,7 @@ class BaseLoader {
     loadComplete() {
         this.list.clear();
         this.inflight.clear();
-        this.queue.clear();
+        // this.queue.clear();
         this.progress = 1;
         this.state = exports.LoaderState.COMPLETE;
         //  Call 'destroy' on each file ready for deletion
@@ -235,13 +339,60 @@ class BaseLoader {
         // this._deleteQueue.clear();
     }
 }
+//# sourceMappingURL=BaseLoader.js.map
+
+function ImageFile(key, url) {
+    if (!url) {
+        url = key + '.png';
+    }
+    const file = File(key, url, 'image');
+    file.xhrSettings.responseType = 'blob';
+    file.onProcess = () => {
+        console.log('ImageFile.onProcess');
+        file.state = exports.FileState.PROCESSING;
+        const image = new Image();
+        file.data = image;
+        // if (file.crossOrigin)
+        // {
+        //     image.crossOrigin = file.crossOrigin;
+        // }
+        return new Promise((resolve, reject) => {
+            image.onload = () => {
+                console.log('ImageFile.onload');
+                image.onload = null;
+                image.onerror = null;
+                file.state = exports.FileState.COMPLETE;
+                resolve(file);
+            };
+            image.onerror = (event) => {
+                console.log('ImageFile.onerror');
+                image.onload = null;
+                image.onerror = null;
+                file.state = exports.FileState.FAILED;
+                reject(file);
+            };
+            console.log('ImageFile.set src', file.url);
+            image.src = file.url;
+            //  Image is immediately-available or cached
+            if (image.complete && image.width && image.height) {
+                console.log('ImageFile.instant');
+                image.onload = null;
+                image.onerror = null;
+                file.state = exports.FileState.COMPLETE;
+                resolve(file);
+            }
+        });
+    };
+    return file;
+}
+//# sourceMappingURL=ImageFile.js.map
 
 class Loader extends BaseLoader {
     constructor() {
         super();
     }
     image(key, url = '') {
-        return this.addFile(key, url);
+        return this.addFile(ImageFile(key, url));
     }
 }
 //# sourceMappingURL=Loader.js.map
