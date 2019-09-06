@@ -13,7 +13,8 @@ export default {
         { file: pkg.browser, name: 'Phaser', format: 'iife', sourcemap: true }
     ],
     watch: {
-        include: 'src/**'
+        chokidar: true,
+        include: './src/**'
     },
     // external: [
     //     ...Object.keys(pkg.dependencies || {}),

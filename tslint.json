@@ -24,7 +24,8 @@
         "newline-before-return": true,
         "indent": [ true, "spaces", 4 ],
         "semicolon": [ true, "always" ],
-        "no-namespace": false
+        "no-namespace": false,
+        "no-string-literal": false
     },
     "rulesDirectory": []
 }

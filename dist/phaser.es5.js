@@ -25,7 +25,69 @@ var Game = /** @class */ (function () {
     };
     return Game;
 }());
-//# sourceMappingURL=Game.js.map
+
+function AddToDOM(element, parent) {
+    var target;
+    if (parent) {
+        if (typeof parent === 'string') {
+            //  Hopefully an element ID
+            target = document.getElementById(parent);
+        }
+        else if (typeof parent === 'object' && parent.nodeType === 1) {
+            //  Quick test for a HTMLElement
+            target = parent;
+        }
+    }
+    else if (element.parentElement) {
+        return element;
+    }
+    //  Fallback, covers an invalid ID and a non HTMLElement object
+    if (!target) {
+        target = document.body;
+    }
+    target.appendChild(element);
+    return element;
+}
+
+function Cordova() {
+    return (window.hasOwnProperty('cordova'));
+}
+
+function DOMContentLoaded(callback) {
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        callback();
+        return;
+    }
+    var check = function () {
+        document.removeEventListener('deviceready', check, true);
+        document.removeEventListener('DOMContentLoaded', check, true);
+        window.removeEventListener('load', check, true);
+        callback();
+    };
+    if (!document.body) {
+        window.setTimeout(check, 20);
+    }
+    else if (Cordova()) {
+        document.addEventListener('deviceready', check, true);
+    }
+    else {
+        document.addEventListener('DOMContentLoaded', check, true);
+        window.addEventListener('load', check, true);
+    }
+}
+
+function RemoveFromDOM(element) {
+    if (element.parentNode) {
+        element.parentNode.removeChild(element);
+    }
+}
+
+//  @namespace Phaser.DOM
+var DOM = {
+    AddToDOM: AddToDOM,
+    DOMContentLoaded: DOMContentLoaded,
+    RemoveFromDOM: RemoveFromDOM
+};
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -93,7 +155,6 @@ var BaseLoaderState;
     BaseLoaderState[BaseLoaderState["SHUTDOWN"] = 4] = "SHUTDOWN";
     BaseLoaderState[BaseLoaderState["DESTROYED"] = 5] = "DESTROYED";
 })(BaseLoaderState || (BaseLoaderState = {}));
-//# sourceMappingURL=BaseLoaderState.js.map
 
 var FileState;
 (function (FileState) {
@@ -109,7 +170,6 @@ var FileState;
     FileState[FileState["TIMED_OUT"] = 9] = "TIMED_OUT";
     FileState[FileState["ABORTED"] = 10] = "ABORTED";
 })(FileState || (FileState = {}));
-//# sourceMappingURL=FileState.js.map
 
 var BaseLoader = /** @class */ (function () {
     function BaseLoader() {
@@ -257,7 +317,6 @@ var BaseLoader = /** @class */ (function () {
     };
     return BaseLoader;
 }());
-//# sourceMappingURL=BaseLoader.js.map
 
 function XHRLoader(file) {
     var e_1, _a;
@@ -337,7 +396,6 @@ function XHRLoader(file) {
     //  ArrayBuffer, Blob, or Document (depending on what was set for responseType.)
     xhr.send();
 }
-//# sourceMappingURL=XHRLoader.js.map
 
 function XHRSettings(config) {
     // Before sending a request, set the xhr.responseType to "text",
@@ -361,7 +419,6 @@ function XHRSettings(config) {
         overrideMimeType: undefined
     };
 }
-//# sourceMappingURL=XHRSettings.js.map
 
 function File(key, url, type) {
     return {
@@ -454,7 +511,6 @@ function File(key, url, type) {
         }
     };
 }
-//# sourceMappingURL=File.js.map
 
 function ImageFile(key, url) {
     if (!url) {
@@ -500,7 +556,6 @@ function ImageFile(key, url) {
     };
     return file;
 }
-//# sourceMappingURL=ImageFile.js.map
 
 var LoaderPlugin = /** @class */ (function (_super) {
     __extends(LoaderPlugin, _super);
@@ -513,7 +568,6 @@ var LoaderPlugin = /** @class */ (function (_super) {
     };
     return LoaderPlugin;
 }(BaseLoader));
-//# sourceMappingURL=LoaderPlugin.js.map
 
 /**
  * @namespace Phaser.Loader
@@ -542,10 +596,8 @@ var Loader = {
         ImageFile: ImageFile
     }
 };
-//# sourceMappingURL=index.js.map
 
 var VERSION = '4.0.0-alpha.3';
-//# sourceMappingURL=Version.js.map
 
-export { Game, Loader, VERSION };
+export { DOM, Game, Loader, VERSION };
 //# sourceMappingURL=phaser.es5.js.map
