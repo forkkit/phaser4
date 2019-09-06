@@ -37,7 +37,7 @@ interface IOSResult {
     windowsPhone: boolean;
 }
 
-export function OS (ua: string = navigator.userAgent): IOSResult
+export function GetOS (ua: string = navigator.userAgent): IOSResult
 {
     const { iOS, iOSVersion, iPad, iPhone } = getiOS(ua);
 

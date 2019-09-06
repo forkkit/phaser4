@@ -29,8 +29,165 @@
             this.context.fillStyle = '#ffff00';
             this.context.fillText(text, 10, 60);
         };
+        Game.prototype.text = function (x, y, text) {
+            this.context.fillStyle = '#00ff00';
+            this.context.font = '16px Courier';
+            this.context.fillText(text, x, y);
+        };
         return Game;
     }());
+
+    function Android(ua) {
+        if (ua === void 0) { ua = navigator.userAgent; }
+        return (/Android/.test(ua));
+    }
+
+    function ChromeOS(ua) {
+        if (ua === void 0) { ua = navigator.userAgent; }
+        return (/CrOS/.test(ua));
+    }
+
+    function Cordova() {
+        return (window.hasOwnProperty('cordova'));
+    }
+
+    function Crosswalk(ua) {
+        if (ua === void 0) { ua = navigator.userAgent; }
+        return ((/Crosswalk/).test(ua));
+    }
+
+    function Ejecta() {
+        return (window.hasOwnProperty('ejecta'));
+    }
+
+    function Node() {
+        return (typeof process !== 'undefined' && typeof process.versions === 'object' && process.versions.hasOwnProperty('node'));
+    }
+
+    function Electron() {
+        return (Node() && !!process.versions['electron']);
+    }
+
+    function iOS(ua) {
+        if (ua === void 0) { ua = navigator.userAgent; }
+        var result = {
+            iOS: false,
+            iOSVersion: 0,
+            iPhone: false,
+            iPad: false
+        };
+        if (/iP[ao]d|iPhone/i.test(ua)) {
+            (navigator.appVersion).match(/OS (\d+)/);
+            result.iOS = true;
+            result.iOSVersion = parseInt(RegExp.$1, 10);
+            result.iPhone = (ua.toLowerCase().indexOf('iphone') !== -1);
+            result.iPad = (ua.toLowerCase().indexOf('ipad') !== -1);
+        }
+        return result;
+    }
+
+    function Kindle(ua) {
+        // This will NOT detect early generations of Kindle Fire, I think there is no reliable way...
+        // E.g. "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true"
+        if (ua === void 0) { ua = navigator.userAgent; }
+        return ((/Kindle/.test(ua) || (/\bKF[A-Z][A-Z]+/).test(ua) || (/Silk.*Mobile Safari/).test(ua)));
+    }
+
+    function Linux(ua) {
+        if (ua === void 0) { ua = navigator.userAgent; }
+        return (/Linux/.test(ua));
+    }
+
+    function MacOS(ua) {
+        if (ua === void 0) { ua = navigator.userAgent; }
+        return (/Mac OS/.test(ua) && !(/like Mac OS/.test(ua)));
+    }
+
+    function NodeWebkit() {
+        return (Node() && !!process.versions['node-webkit']);
+    }
+
+    function WebApp() {
+        return (navigator.hasOwnProperty('standalone'));
+    }
+
+    function Windows(ua) {
+        if (ua === void 0) { ua = navigator.userAgent; }
+        return (/Windows/.test(ua));
+    }
+
+    function WindowsPhone(ua) {
+        if (ua === void 0) { ua = navigator.userAgent; }
+        return (/Windows Phone/i.test(ua) || (/IEMobile/i).test(ua));
+    }
+
+    function GetOS(ua) {
+        if (ua === void 0) { ua = navigator.userAgent; }
+        var _a = iOS(ua), iOS$1 = _a.iOS, iOSVersion = _a.iOSVersion, iPad = _a.iPad, iPhone = _a.iPhone;
+        var result = {
+            android: Android(ua),
+            chromeOS: ChromeOS(ua),
+            cordova: Cordova(),
+            crosswalk: Crosswalk(ua),
+            desktop: false,
+            ejecta: Ejecta(),
+            electron: Electron(),
+            iOS: iOS$1,
+            iOSVersion: iOSVersion,
+            iPad: iPad,
+            iPhone: iPhone,
+            kindle: Kindle(ua),
+            linux: Linux(ua),
+            macOS: MacOS(ua),
+            node: Node(),
+            nodeWebkit: NodeWebkit(),
+            pixelRatio: 1,
+            webApp: WebApp(),
+            windows: Windows(ua),
+            windowsPhone: WindowsPhone(ua)
+        };
+        if (result.windowsPhone) {
+            result.android = false;
+            result.iOS = false;
+            result.macOS = false;
+            result.windows = true;
+        }
+        var silk = (/Silk/).test(ua);
+        if (result.windows || result.macOS || (result.linux && !silk) || result.chromeOS) {
+            result.desktop = true;
+        }
+        //  Windows Phone / Table reset
+        if (result.windowsPhone || ((/Windows NT/i.test(ua)) && (/Touch/i.test(ua)))) {
+            result.desktop = false;
+        }
+        return result;
+    }
+
+    //  @namespace Phaser.Device.OS
+    var OS = {
+        Android: Android,
+        ChromeOS: ChromeOS,
+        Cordova: Cordova,
+        Crosswalk: Crosswalk,
+        Ejecta: Ejecta,
+        Electron: Electron,
+        GetOS: GetOS,
+        iOS: iOS,
+        Kindle: Kindle,
+        Linux: Linux,
+        MacOS: MacOS,
+        Node: Node,
+        NodeWebkit: NodeWebkit,
+        WebApp: WebApp,
+        Windows: Windows,
+        WindowsPhone: WindowsPhone
+    };
+
+    //  Phaser.Device
+    var Device = {
+        OS: OS,
+        GetOS: GetOS
+    };
 
     function AddToDOM(element, parent) {
         var target;
@@ -53,10 +210,6 @@
         }
         target.appendChild(element);
         return element;
-    }
-
-    function Cordova() {
-        return (window.hasOwnProperty('cordova'));
     }
 
     function DOMContentLoaded(callback) {
@@ -606,6 +759,7 @@
     var VERSION = '4.0.0-alpha.3';
 
     exports.DOM = DOM;
+    exports.Device = Device;
     exports.Game = Game;
     exports.Loader = Loader;
     exports.VERSION = VERSION;

@@ -14,24 +14,22 @@ import { NodeWebkit } from './NodeWebkit';
 import { WebApp } from './WebApp';
 import { Windows } from './Windows';
 import { WindowsPhone } from './WindowsPhone';
-
-//  @namespace Phaser.Device.OS
-
-export const OS = {
-    Android,
-    ChromeOS,
-    Cordova,
-    Crosswalk,
-    Ejecta,
-    Electron,
-    GetOS,
-    iOS,
-    Kindle,
-    Linux,
-    MacOS,
-    Node,
-    NodeWebkit,
-    WebApp,
-    Windows,
-    WindowsPhone
+export declare const OS: {
+    Android: typeof Android;
+    ChromeOS: typeof ChromeOS;
+    Cordova: typeof Cordova;
+    Crosswalk: typeof Crosswalk;
+    Ejecta: typeof Ejecta;
+    Electron: typeof Electron;
+    GetOS: typeof GetOS;
+    iOS: typeof iOS;
+    Kindle: typeof Kindle;
+    Linux: typeof Linux;
+    MacOS: typeof MacOS;
+    Node: typeof Node;
+    NodeWebkit: typeof NodeWebkit;
+    WebApp: typeof WebApp;
+    Windows: typeof Windows;
+    WindowsPhone: typeof WindowsPhone;
 };
+//# sourceMappingURL=index.d.ts.map

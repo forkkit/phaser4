@@ -1,0 +1,1 @@
+{"version":3,"file":"iOS.d.ts","sourceRoot":"","sources":["../../../src/device/os/iOS.ts"],"names":[],"mappings":"AAAA,UAAU,OAAO;IACb,GAAG,EAAE,OAAO,CAAC;IACb,UAAU,EAAE,MAAM,CAAC;IACnB,MAAM,EAAE,OAAO,CAAC;IAChB,IAAI,EAAE,OAAO,CAAC;CACjB;AAED,wBAAgB,GAAG,CAAE,EAAE,GAAE,MAA4B,GAAG,OAAO,CAoB9D"}

@@ -32,4 +32,12 @@ export class Game
         this.context.fillStyle = '#ffff00';
         this.context.fillText(text, 10, 60);
     }
+
+    public text (x: number, y: number, text: string)
+    {
+        this.context.fillStyle = '#00ff00';
+        this.context.font = '16px Courier';
+        this.context.fillText(text, x, y);
+    }
+
 }
