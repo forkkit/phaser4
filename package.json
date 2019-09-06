@@ -3,7 +3,7 @@
   "version": "4.0.0-alpha.3",
   "description": "A fast, free and fun HTML5 Game Framework for Desktop and Mobile web browsers.",
   "main": "dist/phaser.umd.js",
-  "module": "dist/phaser.es5.js",
+  "module": "dist/phaser.mjs",
   "browser": "dist/phaser.js",
   "types": "types/index.d.ts",
   "typings": "types/index.d.ts",

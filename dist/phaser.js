@@ -1,18 +1,79 @@
 var Phaser = (function (exports) {
     'use strict';
 
+    function AddToDOM(element, parent) {
+        var target;
+        if (parent) {
+            if (typeof parent === 'string') {
+                //  Hopefully an element ID
+                target = document.getElementById(parent);
+            }
+            else if (typeof parent === 'object' && parent.nodeType === 1) {
+                //  Quick test for a HTMLElement
+                target = parent;
+            }
+        }
+        else if (element.parentElement) {
+            return element;
+        }
+        //  Fallback, covers an invalid ID and a non HTMLElement object
+        if (!target) {
+            target = document.body;
+        }
+        target.appendChild(element);
+        return element;
+    }
+
+    function isCordova() {
+        return (window.hasOwnProperty('cordova'));
+    }
+
+    function DOMContentLoaded(callback) {
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            callback();
+            return;
+        }
+        var check = function () {
+            document.removeEventListener('deviceready', check, true);
+            document.removeEventListener('DOMContentLoaded', check, true);
+            window.removeEventListener('load', check, true);
+            callback();
+        };
+        if (!document.body) {
+            window.setTimeout(check, 20);
+        }
+        else if (isCordova()) {
+            document.addEventListener('deviceready', check, true);
+        }
+        else {
+            document.addEventListener('DOMContentLoaded', check, true);
+            window.addEventListener('load', check, true);
+        }
+    }
+
     var Game = /** @class */ (function () {
-        function Game(width, height) {
+        function Game() {
+            var _this = this;
+            this.isBooted = false;
+            this.isRunning = false;
+            DOMContentLoaded(function () { return _this.boot(); });
+        }
+        Game.prototype.boot = function () {
+            this.isBooted = true;
+            this.createDebugCanvas();
+            AddToDOM(this.canvas);
+        };
+        Game.prototype.createDebugCanvas = function (width, height) {
             if (width === void 0) { width = 800; }
             if (height === void 0) { height = 600; }
+            console.log('Phaser 4.0.0-alpha.3');
             this.canvas = document.createElement('canvas');
             this.canvas.width = width;
             this.canvas.height = height;
-            document.body.appendChild(this.canvas);
             this.context = this.canvas.getContext('2d');
             this.context.fillStyle = '#2d2d2d';
             this.context.fillRect(0, 0, width, height);
-        }
+        };
         Game.prototype.drawImage = function (image, x, y) {
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
@@ -41,7 +102,7 @@ var Phaser = (function (exports) {
 
     function canPlayMP3(audioElement) {
         if (audioElement === void 0) { audioElement = document.createElement('audio'); }
-        return (audioElement.canPlayType('audio/mpeg') !== '');
+        return (audioElement.canPlayType('audio/mpeg; codecs="mp3"') !== '');
     }
 
     function canPlayOGG(audioElement) {
@@ -51,7 +112,7 @@ var Phaser = (function (exports) {
 
     function canPlayOpus(audioElement) {
         if (audioElement === void 0) { audioElement = document.createElement('audio'); }
-        return ((audioElement.canPlayType('audio/ogg; codecs="opus"') !== '') || (audioElement.canPlayType('audio/opus') !== ''));
+        return ((audioElement.canPlayType('audio/ogg; codecs="opus"') !== '') || (audioElement.canPlayType('audio/webm; codecs="opus"') !== ''));
     }
 
     function canPlayWAV(audioElement) {
@@ -245,10 +306,6 @@ var Phaser = (function (exports) {
         return (/CrOS/.test(navigator.userAgent));
     }
 
-    function isCordova() {
-        return (window.hasOwnProperty('cordova'));
-    }
-
     function isCrosswalk() {
         return ((/Crosswalk/).test(navigator.userAgent));
     }
@@ -400,52 +457,6 @@ var Phaser = (function (exports) {
         OS: GetOS(),
         Video: GetVideo()
     };
-
-    function AddToDOM(element, parent) {
-        var target;
-        if (parent) {
-            if (typeof parent === 'string') {
-                //  Hopefully an element ID
-                target = document.getElementById(parent);
-            }
-            else if (typeof parent === 'object' && parent.nodeType === 1) {
-                //  Quick test for a HTMLElement
-                target = parent;
-            }
-        }
-        else if (element.parentElement) {
-            return element;
-        }
-        //  Fallback, covers an invalid ID and a non HTMLElement object
-        if (!target) {
-            target = document.body;
-        }
-        target.appendChild(element);
-        return element;
-    }
-
-    function DOMContentLoaded(callback) {
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            callback();
-            return;
-        }
-        var check = function () {
-            document.removeEventListener('deviceready', check, true);
-            document.removeEventListener('DOMContentLoaded', check, true);
-            window.removeEventListener('load', check, true);
-            callback();
-        };
-        if (!document.body) {
-            window.setTimeout(check, 20);
-        }
-        else if (isCordova()) {
-            document.addEventListener('deviceready', check, true);
-        }
-        else {
-            document.addEventListener('DOMContentLoaded', check, true);
-            window.addEventListener('load', check, true);
-        }
-    }
 
     function RemoveFromDOM(element) {
         if (element.parentNode) {
