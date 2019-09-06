@@ -1,16 +1,36 @@
+import { AddToDOM } from './dom/AddToDOM';
+import { DOMContentLoaded } from './dom/DOMContentLoaded';
+
 export class Game
 {
-    public canvas: HTMLCanvasElement;
-    public context: CanvasRenderingContext2D;
+    canvas: HTMLCanvasElement;
+    context: CanvasRenderingContext2D;
 
-    constructor (width: number = 800, height: number = 600)
+    isBooted: boolean = false;
+    isRunning: boolean = false;
+
+    constructor ()
     {
+        DOMContentLoaded(() => this.boot());
+    }
+
+    boot ()
+    {
+        this.isBooted = true;
+
+        this.createDebugCanvas();
+
+        AddToDOM(this.canvas);
+    }
+
+    createDebugCanvas (width: number = 800, height: number = 600)
+    {
+        console.log('Phaser 4.0.0-alpha.3');
+
         this.canvas = document.createElement('canvas');
 
         this.canvas.width = width;
         this.canvas.height = height;
-
-        document.body.appendChild(this.canvas);
 
         this.context = this.canvas.getContext('2d') as CanvasRenderingContext2D;
 
@@ -18,12 +38,12 @@ export class Game
         this.context.fillRect(0, 0, width, height);
     }
 
-    public drawImage (image: CanvasImageSource, x: number = 0, y: number = 0)
+    drawImage (image: CanvasImageSource, x: number = 0, y: number = 0)
     {
         this.context.drawImage(image, x, y);
     }
 
-    public draw (text: string)
+    draw (text: string)
     {
         this.context.fillStyle = '#ff0000';
         this.context.fillText(text, 10, 40);
@@ -33,7 +53,7 @@ export class Game
         this.context.fillText(text, 10, 60);
     }
 
-    public text (x: number, y: number, text: string)
+    text (x: number, y: number, text: string)
     {
         this.context.fillStyle = '#00ff00';
         this.context.font = '16px Courier';
