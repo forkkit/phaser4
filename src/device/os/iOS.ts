@@ -1,13 +1,13 @@
-interface IResult {
+interface IIOSResult {
     iOS: boolean;
     iOSVersion: number;
     iPhone: boolean;
     iPad: boolean;
 }
 
-export function iOS (ua: string = navigator.userAgent): IResult
+export function iOS (ua: string = navigator.userAgent): IIOSResult
 {
-    const result: IResult = {
+    const result: IIOSResult = {
         iOS: false,
         iOSVersion: 0,
         iPhone: false,
