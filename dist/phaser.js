@@ -23,12 +23,10 @@ var Phaser = (function (exports) {
         target.appendChild(element);
         return element;
     }
-    //# sourceMappingURL=AddToDOM.js.map
 
     function isCordova() {
         return (window.hasOwnProperty('cordova'));
     }
-    //# sourceMappingURL=isCordova.js.map
 
     function DOMContentLoaded(callback) {
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
@@ -52,7 +50,6 @@ var Phaser = (function (exports) {
             window.addEventListener('load', check, true);
         }
     }
-    //# sourceMappingURL=DOMContentLoaded.js.map
 
     var Game = /** @class */ (function () {
         function Game(init) {
@@ -104,47 +101,39 @@ var Phaser = (function (exports) {
         if (audioElement === void 0) { audioElement = document.createElement('audio'); }
         return ((audioElement.canPlayType('audio/x-m4a') !== '') || (audioElement.canPlayType('audio/aac') !== ''));
     }
-    //# sourceMappingURL=canPlayM4A.js.map
 
     function canPlayMP3(audioElement) {
         if (audioElement === void 0) { audioElement = document.createElement('audio'); }
         return (audioElement.canPlayType('audio/mpeg; codecs="mp3"') !== '');
     }
-    //# sourceMappingURL=canPlayMP3.js.map
 
     function canPlayOGG(audioElement) {
         if (audioElement === void 0) { audioElement = document.createElement('audio'); }
         return (audioElement.canPlayType('audio/ogg; codecs="vorbis"') !== '');
     }
-    //# sourceMappingURL=canPlayOGG.js.map
 
     function canPlayOpus(audioElement) {
         if (audioElement === void 0) { audioElement = document.createElement('audio'); }
         return ((audioElement.canPlayType('audio/ogg; codecs="opus"') !== '') || (audioElement.canPlayType('audio/webm; codecs="opus"') !== ''));
     }
-    //# sourceMappingURL=canPlayOpus.js.map
 
     function canPlayWAV(audioElement) {
         if (audioElement === void 0) { audioElement = document.createElement('audio'); }
         return (audioElement.canPlayType('audio/wav; codecs="1"') !== '');
     }
-    //# sourceMappingURL=canPlayWAV.js.map
 
     function canPlayWebM(audioElement) {
         if (audioElement === void 0) { audioElement = document.createElement('audio'); }
         return (audioElement.canPlayType('audio/webm; codecs="vorbis"') !== '');
     }
-    //# sourceMappingURL=canPlayWebM.js.map
 
     function hasAudio() {
         return (window.hasOwnProperty('Audio'));
     }
-    //# sourceMappingURL=hasAudio.js.map
 
     function hasWebAudio() {
         return (window.hasOwnProperty('AudioContext') || window.hasOwnProperty('webkitAudioContext'));
     }
-    //# sourceMappingURL=hasWebAudio.js.map
 
     function GetAudio() {
         var result = {
@@ -177,7 +166,6 @@ var Phaser = (function (exports) {
         }
         return result;
     }
-    //# sourceMappingURL=GetAudio.js.map
 
     function isChrome() {
         var chrome = (/Chrome\/(\d+)/).test(navigator.userAgent);
@@ -187,7 +175,6 @@ var Phaser = (function (exports) {
             chromeVersion: chromeVersion
         };
     }
-    //# sourceMappingURL=isChrome.js.map
 
     function isEdge() {
         var edge = (/Edge\/\d+/).test(navigator.userAgent);
@@ -195,7 +182,6 @@ var Phaser = (function (exports) {
             edge: edge
         };
     }
-    //# sourceMappingURL=isEdge.js.map
 
     function isFirefox() {
         var firefox = (/Firefox\D+(\d+)/).test(navigator.userAgent);
@@ -205,7 +191,6 @@ var Phaser = (function (exports) {
             firefoxVersion: firefoxVersion
         };
     }
-    //# sourceMappingURL=isFirefox.js.map
 
     function isiOS() {
         var ua = navigator.userAgent;
@@ -224,7 +209,6 @@ var Phaser = (function (exports) {
         }
         return result;
     }
-    //# sourceMappingURL=isiOS.js.map
 
     function isMobileSafari() {
         var iOS = isiOS().iOS;
@@ -233,7 +217,6 @@ var Phaser = (function (exports) {
             mobileSafari: mobileSafari
         };
     }
-    //# sourceMappingURL=isMobileSafari.js.map
 
     function isMSIE() {
         var ie = (/MSIE (\d+\.\d+);/).test(navigator.userAgent);
@@ -243,7 +226,6 @@ var Phaser = (function (exports) {
             ieVersion: ieVersion
         };
     }
-    //# sourceMappingURL=isMSIE.js.map
 
     function isOpera() {
         var opera = (/Opera/).test(navigator.userAgent);
@@ -251,13 +233,11 @@ var Phaser = (function (exports) {
             opera: opera
         };
     }
-    //# sourceMappingURL=isOpera.js.map
 
     function isWindowsPhone() {
         var ua = navigator.userAgent;
         return (/Windows Phone/i.test(ua) || (/IEMobile/i).test(ua));
     }
-    //# sourceMappingURL=isWindowsPhone.js.map
 
     function isSafari() {
         var ua = navigator.userAgent;
@@ -268,7 +248,6 @@ var Phaser = (function (exports) {
             safariVersion: safariVersion
         };
     }
-    //# sourceMappingURL=isSafari.js.map
 
     function isSilk() {
         var silk = (/Silk/).test(navigator.userAgent);
@@ -276,7 +255,6 @@ var Phaser = (function (exports) {
             silk: silk
         };
     }
-    //# sourceMappingURL=isSilk.js.map
 
     function isTrident() {
         var trident = (/Trident\/(\d+\.\d+)(.*)rv:(\d+\.\d+)/).test(navigator.userAgent);
@@ -288,7 +266,6 @@ var Phaser = (function (exports) {
             tridentIEVersion: tridentIEVersion
         };
     }
-    //# sourceMappingURL=isTrident.js.map
 
     function GetBrowser() {
         var _a = isChrome(), chrome = _a.chrome, chromeVersion = _a.chromeVersion;
@@ -322,37 +299,30 @@ var Phaser = (function (exports) {
         };
         return result;
     }
-    //# sourceMappingURL=GetBrowser.js.map
 
     function isAndroid() {
         return (/Android/.test(navigator.userAgent));
     }
-    //# sourceMappingURL=isAndroid.js.map
 
     function isChromeOS() {
         return (/CrOS/.test(navigator.userAgent));
     }
-    //# sourceMappingURL=isChromeOS.js.map
 
     function isCrosswalk() {
         return ((/Crosswalk/).test(navigator.userAgent));
     }
-    //# sourceMappingURL=isCrosswalk.js.map
 
     function isEjecta() {
         return (window.hasOwnProperty('ejecta'));
     }
-    //# sourceMappingURL=isEjecta.js.map
 
     function isNode() {
         return (typeof process !== 'undefined' && typeof process.versions === 'object' && process.versions.hasOwnProperty('node'));
     }
-    //# sourceMappingURL=isNode.js.map
 
     function isElectron() {
         return (isNode() && !!process.versions['electron']);
     }
-    //# sourceMappingURL=isElectron.js.map
 
     function isKindle() {
         // This will NOT detect early generations of Kindle Fire, I think there is no reliable way...
@@ -360,33 +330,27 @@ var Phaser = (function (exports) {
         var ua = navigator.userAgent;
         return ((/Kindle/.test(ua) || (/\bKF[A-Z][A-Z]+/).test(ua) || (/Silk.*Mobile Safari/).test(ua)));
     }
-    //# sourceMappingURL=isKindle.js.map
 
     function isLinux() {
         return (/Linux/.test(navigator.userAgent));
     }
-    //# sourceMappingURL=isLinux.js.map
 
     function isMacOS() {
         var ua = navigator.userAgent;
         return (/Mac OS/.test(ua) && !(/like Mac OS/.test(ua)));
     }
-    //# sourceMappingURL=isMacOS.js.map
 
     function isNodeWebkit() {
         return (isNode() && !!process.versions['node-webkit']);
     }
-    //# sourceMappingURL=isNodeWebkit.js.map
 
     function isWebApp() {
         return (navigator.hasOwnProperty('standalone'));
     }
-    //# sourceMappingURL=isWebApp.js.map
 
     function isWindows() {
         return (/Windows/.test(navigator.userAgent));
     }
-    //# sourceMappingURL=isWindows.js.map
 
     function GetOS() {
         var ua = navigator.userAgent;
@@ -429,37 +393,31 @@ var Phaser = (function (exports) {
         }
         return result;
     }
-    //# sourceMappingURL=GetOS.js.map
 
     function canPlayH264Video(videoElement) {
         if (videoElement === void 0) { videoElement = document.createElement('video'); }
         return (videoElement.canPlayType('video/mp4; codecs="avc1.42E01E"') !== '');
     }
-    //# sourceMappingURL=canPlayH264Video.js.map
 
     function canPlayHLSVideo(videoElement) {
         if (videoElement === void 0) { videoElement = document.createElement('video'); }
         return (videoElement.canPlayType('application/x-mpegURL; codecs="avc1.42E01E"') !== '');
     }
-    //# sourceMappingURL=canPlayHLSVideo.js.map
 
     function canPlayOGGVideo(videoElement) {
         if (videoElement === void 0) { videoElement = document.createElement('video'); }
         return (videoElement.canPlayType('video/ogg; codecs="theora"') !== '');
     }
-    //# sourceMappingURL=canPlayOGGVideo.js.map
 
     function canPlayVP9Video(videoElement) {
         if (videoElement === void 0) { videoElement = document.createElement('video'); }
         return (videoElement.canPlayType('video/webm; codecs="vp9"') !== '');
     }
-    //# sourceMappingURL=canPlayVP9Video.js.map
 
     function canPlayWebMVideo(videoElement) {
         if (videoElement === void 0) { videoElement = document.createElement('video'); }
         return (videoElement.canPlayType('video/webm; codecs="vp8, vorbis"') !== '');
     }
-    //# sourceMappingURL=canPlayWebMVideo.js.map
 
     function GetVideo() {
         var result = {
@@ -489,7 +447,6 @@ var Phaser = (function (exports) {
         result.mp4Video = result.hlsVideo;
         return result;
     }
-    //# sourceMappingURL=GetVideo.js.map
 
     //  Phaser.Device
     var Device = {
@@ -502,14 +459,12 @@ var Phaser = (function (exports) {
         OS: GetOS(),
         Video: GetVideo()
     };
-    //# sourceMappingURL=index.js.map
 
     function RemoveFromDOM(element) {
         if (element.parentNode) {
             element.parentNode.removeChild(element);
         }
     }
-    //# sourceMappingURL=RemoveFromDOM.js.map
 
     //  @namespace Phaser.DOM
     var DOM = {
@@ -517,7 +472,6 @@ var Phaser = (function (exports) {
         DOMContentLoaded: DOMContentLoaded,
         RemoveFromDOM: RemoveFromDOM
     };
-    //# sourceMappingURL=index.js.map
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -585,7 +539,6 @@ var Phaser = (function (exports) {
         BaseLoaderState[BaseLoaderState["SHUTDOWN"] = 4] = "SHUTDOWN";
         BaseLoaderState[BaseLoaderState["DESTROYED"] = 5] = "DESTROYED";
     })(BaseLoaderState || (BaseLoaderState = {}));
-    //# sourceMappingURL=BaseLoaderState.js.map
 
     var FileState;
     (function (FileState) {
@@ -601,7 +554,6 @@ var Phaser = (function (exports) {
         FileState[FileState["TIMED_OUT"] = 9] = "TIMED_OUT";
         FileState[FileState["ABORTED"] = 10] = "ABORTED";
     })(FileState || (FileState = {}));
-    //# sourceMappingURL=FileState.js.map
 
     var BaseLoader = /** @class */ (function () {
         function BaseLoader() {
@@ -749,7 +701,6 @@ var Phaser = (function (exports) {
         };
         return BaseLoader;
     }());
-    //# sourceMappingURL=BaseLoader.js.map
 
     function XHRLoader(file) {
         var e_1, _a;
@@ -829,7 +780,6 @@ var Phaser = (function (exports) {
         //  ArrayBuffer, Blob, or Document (depending on what was set for responseType.)
         xhr.send();
     }
-    //# sourceMappingURL=XHRLoader.js.map
 
     function XHRSettings(config) {
         // Before sending a request, set the xhr.responseType to "text",
@@ -853,7 +803,6 @@ var Phaser = (function (exports) {
             overrideMimeType: undefined
         };
     }
-    //# sourceMappingURL=XHRSettings.js.map
 
     function File(key, url, type) {
         return {
@@ -946,7 +895,6 @@ var Phaser = (function (exports) {
             }
         };
     }
-    //# sourceMappingURL=File.js.map
 
     function ImageFile(key, url) {
         if (!url) {
@@ -992,7 +940,6 @@ var Phaser = (function (exports) {
         };
         return file;
     }
-    //# sourceMappingURL=ImageFile.js.map
 
     var LoaderPlugin = /** @class */ (function (_super) {
         __extends(LoaderPlugin, _super);
@@ -1005,7 +952,6 @@ var Phaser = (function (exports) {
         };
         return LoaderPlugin;
     }(BaseLoader));
-    //# sourceMappingURL=LoaderPlugin.js.map
 
     /**
      * @namespace Phaser.Loader
@@ -1034,10 +980,8 @@ var Phaser = (function (exports) {
             ImageFile: ImageFile
         }
     };
-    //# sourceMappingURL=index.js.map
 
     var VERSION = '4.0.0-alpha.3';
-    //# sourceMappingURL=Version.js.map
 
     exports.DOM = DOM;
     exports.Device = Device;
