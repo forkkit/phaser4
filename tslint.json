@@ -25,7 +25,8 @@
         "indent": [ true, "spaces", 4 ],
         "semicolon": [ true, "always" ],
         "no-namespace": false,
-        "no-string-literal": false
+        "no-string-literal": false,
+        "member-access": [ true, "no-public" ]
     },
     "rulesDirectory": []
 }
