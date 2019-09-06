@@ -1,3 +1,4 @@
+import { IDeviceOSResult } from './IDeviceOSResult';
 import { isAndroid } from './isAndroid';
 import { isChromeOS } from './isChromeOS';
 import { isCordova } from './isCordova';
@@ -13,29 +14,6 @@ import { isNodeWebkit } from './isNodeWebkit';
 import { isWebApp } from './isWebApp';
 import { isWindows } from './isWindows';
 import { isWindowsPhone } from './isWindowsPhone';
-
-interface IDeviceOSResult {
-    android: boolean;
-    chromeOS: boolean;
-    cordova: boolean;
-    crosswalk: boolean;
-    desktop: boolean;
-    ejecta: boolean;
-    electron: boolean;
-    iOS: boolean;
-    iOSVersion: number;
-    iPad: boolean;
-    iPhone: boolean;
-    kindle: boolean;
-    linux: boolean;
-    macOS: boolean;
-    node: boolean;
-    nodeWebkit: boolean;
-    pixelRatio: number;
-    webApp: boolean;
-    windows: boolean;
-    windowsPhone: boolean;
-}
 
 export function GetOS (): IDeviceOSResult
 {
