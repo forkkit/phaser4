@@ -1,4 +1,4 @@
-interface IOSResult {
+interface IDeviceOSResult {
     android: boolean;
     chromeOS: boolean;
     cordova: boolean;
@@ -20,6 +20,6 @@ interface IOSResult {
     windows: boolean;
     windowsPhone: boolean;
 }
-export declare function GetOS(ua?: string): IOSResult;
+export declare function GetOS(): IDeviceOSResult;
 export {};
 //# sourceMappingURL=GetOS.d.ts.map

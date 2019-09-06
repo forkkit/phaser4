@@ -1,37 +1,37 @@
-import { Android } from './Android';
-import { ChromeOS } from './ChromeOS';
-import { Cordova } from './Cordova';
-import { Crosswalk } from './Crosswalk';
-import { Ejecta } from './Ejecta';
-import { Electron } from './Electron';
 import { GetOS } from './GetOS';
-import { iOS } from './iOS';
-import { Kindle } from './Kindle';
-import { Linux } from './Linux';
-import { MacOS } from './MacOS';
-import { Node } from './Node';
-import { NodeWebkit } from './NodeWebkit';
-import { WebApp } from './WebApp';
-import { Windows } from './Windows';
-import { WindowsPhone } from './WindowsPhone';
+import { isAndroid } from './isAndroid';
+import { isChromeOS } from './isChromeOS';
+import { isCordova } from './isCordova';
+import { isCrosswalk } from './isCrosswalk';
+import { isEjecta } from './isEjecta';
+import { isElectron } from './isElectron';
+import { isiOS } from './isiOS';
+import { isKindle } from './isKindle';
+import { isLinux } from './isLinux';
+import { isMacOS } from './isMacOS';
+import { isNode } from './isNode';
+import { isNodeWebkit } from './isNodeWebkit';
+import { isWebApp } from './isWebApp';
+import { isWindows } from './isWindows';
+import { isWindowsPhone } from './isWindowsPhone';
 
 //  @namespace Phaser.Device.OS
 
 export const OS = {
-    Android,
-    ChromeOS,
-    Cordova,
-    Crosswalk,
-    Ejecta,
-    Electron,
+    Android: isAndroid,
+    ChromeOS: isChromeOS,
+    Cordova: isCordova,
+    Crosswalk: isCrosswalk,
+    Ejecta: isEjecta,
+    Electron: isElectron,
     GetOS,
-    iOS,
-    Kindle,
-    Linux,
-    MacOS,
-    Node,
-    NodeWebkit,
-    WebApp,
-    Windows,
-    WindowsPhone
+    iOS: isiOS,
+    Kindle: isKindle,
+    Linux: isLinux,
+    MacOS: isMacOS,
+    Node: isNode,
+    NodeWebkit: isNodeWebkit,
+    WebApp: isWebApp,
+    Windows: isWindows,
+    WindowsPhone: isWindowsPhone
 };

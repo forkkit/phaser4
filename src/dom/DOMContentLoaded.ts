@@ -1,4 +1,4 @@
-import { Cordova } from '../device/os/Cordova';
+import { isCordova } from '../device/os/isCordova';
 
 export function DOMContentLoaded (callback: () => void)
 {
@@ -22,7 +22,7 @@ export function DOMContentLoaded (callback: () => void)
     {
         window.setTimeout(check, 20);
     }
-    else if (Cordova())
+    else if (isCordova())
     {
         document.addEventListener('deviceready', check, true);
     }

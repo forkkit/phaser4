@@ -1,20 +1,20 @@
-import { Android } from './Android';
-import { ChromeOS } from './ChromeOS';
-import { Cordova } from './Cordova';
-import { Crosswalk } from './Crosswalk';
-import { Ejecta } from './Ejecta';
-import { Electron } from './Electron';
-import { iOS as getiOS } from './iOS';
-import { Kindle } from './Kindle';
-import { Linux } from './Linux';
-import { MacOS } from './MacOS';
-import { Node } from './Node';
-import { NodeWebkit } from './NodeWebkit';
-import { WebApp } from './WebApp';
-import { Windows } from './Windows';
-import { WindowsPhone } from './WindowsPhone';
+import { isAndroid } from './isAndroid';
+import { isChromeOS } from './isChromeOS';
+import { isCordova } from './isCordova';
+import { isCrosswalk } from './isCrosswalk';
+import { isEjecta } from './isEjecta';
+import { isElectron } from './isElectron';
+import { isiOS } from './isiOS';
+import { isKindle } from './isKindle';
+import { isLinux } from './isLinux';
+import { isMacOS } from './isMacOS';
+import { isNode } from './isNode';
+import { isNodeWebkit } from './isNodeWebkit';
+import { isWebApp } from './isWebApp';
+import { isWindows } from './isWindows';
+import { isWindowsPhone } from './isWindowsPhone';
 
-interface IOSResult {
+interface IDeviceOSResult {
     android: boolean;
     chromeOS: boolean;
     cordova: boolean;
@@ -37,31 +37,33 @@ interface IOSResult {
     windowsPhone: boolean;
 }
 
-export function GetOS (ua: string = navigator.userAgent): IOSResult
+export function GetOS (): IDeviceOSResult
 {
-    const { iOS, iOSVersion, iPad, iPhone } = getiOS(ua);
+    const ua: string = navigator.userAgent;
 
-    const result: IOSResult = {
-        android: Android(ua),
-        chromeOS: ChromeOS(ua),
-        cordova: Cordova(),
-        crosswalk: Crosswalk(ua),
+    const { iOS, iOSVersion, iPad, iPhone } = isiOS();
+
+    const result: IDeviceOSResult = {
+        android: isAndroid(),
+        chromeOS: isChromeOS(),
+        cordova: isCordova(),
+        crosswalk: isCrosswalk(),
         desktop: false,
-        ejecta: Ejecta(),
-        electron: Electron(),
+        ejecta: isEjecta(),
+        electron: isElectron(),
         iOS,
         iOSVersion,
         iPad,
         iPhone,
-        kindle: Kindle(ua),
-        linux: Linux(ua),
-        macOS: MacOS(ua),
-        node: Node(),
-        nodeWebkit: NodeWebkit(),
+        kindle: isKindle(),
+        linux: isLinux(),
+        macOS: isMacOS(),
+        node: isNode(),
+        nodeWebkit: isNodeWebkit(),
         pixelRatio: 1,
-        webApp: WebApp(),
-        windows: Windows(ua),
-        windowsPhone: WindowsPhone(ua)
+        webApp: isWebApp(),
+        windows: isWindows(),
+        windowsPhone: isWindowsPhone()
     };
 
     if (result.windowsPhone)

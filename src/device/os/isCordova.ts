@@ -1,4 +1,4 @@
-export function Cordova (): boolean
+export function isCordova (): boolean
 {
     return (window.hasOwnProperty('cordova'));
 }

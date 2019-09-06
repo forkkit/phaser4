@@ -1,4 +1,4 @@
-export function Ejecta (): boolean
+export function isEjecta (): boolean
 {
     return (window.hasOwnProperty('ejecta'));
 }

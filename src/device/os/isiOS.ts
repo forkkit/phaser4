@@ -1,13 +1,15 @@
-interface IIOSResult {
+interface IGetIOSResult {
     iOS: boolean;
     iOSVersion: number;
     iPhone: boolean;
     iPad: boolean;
 }
 
-export function iOS (ua: string = navigator.userAgent): IIOSResult
+export function isiOS (): IGetIOSResult
 {
-    const result: IIOSResult = {
+    const ua: string = navigator.userAgent;
+
+    const result: IGetIOSResult = {
         iOS: false,
         iOSVersion: 0,
         iPhone: false,

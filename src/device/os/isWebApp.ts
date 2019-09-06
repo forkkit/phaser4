@@ -1,4 +1,4 @@
-export function WebApp (): boolean
+export function isWebApp (): boolean
 {
     return (navigator.hasOwnProperty('standalone'));
 }
