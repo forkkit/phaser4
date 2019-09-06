@@ -81,8 +81,9 @@ function GetAudio() {
         webm: false
     };
     if (result.audioData) {
+        var audioElement = document.createElement('audio');
+        // IE9 Running on Windows Server SKU can cause an exception to be thrown
         try {
-            var audioElement = document.createElement('audio');
             var canPlay = !!audioElement.canPlayType;
             if (canPlay) {
                 result.m4a = canPlayM4A(audioElement);
@@ -331,14 +332,70 @@ function GetOS() {
     return result;
 }
 
+function canPlayH264Video(videoElement) {
+    if (videoElement === void 0) { videoElement = document.createElement('video'); }
+    return (videoElement.canPlayType('video/mp4; codecs="avc1.42E01E"') !== '');
+}
+
+function canPlayHLSVideo(videoElement) {
+    if (videoElement === void 0) { videoElement = document.createElement('video'); }
+    return (videoElement.canPlayType('application/x-mpegURL; codecs="avc1.42E01E"') !== '');
+}
+
+function canPlayOGGVideo(videoElement) {
+    if (videoElement === void 0) { videoElement = document.createElement('video'); }
+    return (videoElement.canPlayType('video/ogg; codecs="theora"') !== '');
+}
+
+function canPlayVP9Video(videoElement) {
+    if (videoElement === void 0) { videoElement = document.createElement('video'); }
+    return (videoElement.canPlayType('video/webm; codecs="vp9"') !== '');
+}
+
+function canPlayWebMVideo(videoElement) {
+    if (videoElement === void 0) { videoElement = document.createElement('video'); }
+    return (videoElement.canPlayType('video/webm; codecs="vp8, vorbis"') !== '');
+}
+
+function GetVideo() {
+    var result = {
+        h264Video: false,
+        hlsVideo: false,
+        mp4Video: false,
+        oggVideo: false,
+        vp9Video: false,
+        webmVideo: false
+    };
+    var videoElement = document.createElement('video');
+    // IE9 Running on Windows Server SKU can cause an exception to be thrown
+    try {
+        var canPlay = !!videoElement.canPlayType;
+        if (canPlay) {
+            result.h264Video = canPlayH264Video(videoElement);
+            result.hlsVideo = canPlayHLSVideo(videoElement);
+            result.oggVideo = canPlayOGGVideo(videoElement);
+            result.vp9Video = canPlayVP9Video(videoElement);
+            result.webmVideo = canPlayWebMVideo(videoElement);
+        }
+    }
+    catch (error) {
+        //  Nothing to do here
+    }
+    //  Duplicate the result for Phaser 3 compatibility
+    result.mp4Video = result.hlsVideo;
+    return result;
+}
+
 //  Phaser.Device
 var Device = {
     GetAudio: GetAudio,
     GetBrowser: GetBrowser,
     GetOS: GetOS,
+    GetVideo: GetVideo,
     Audio: GetAudio(),
     Browser: GetBrowser(),
-    OS: GetOS()
+    OS: GetOS(),
+    Video: GetVideo()
 };
 
 function AddToDOM(element, parent) {
