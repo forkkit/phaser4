@@ -3,7 +3,8 @@ export declare class Game {
     context: CanvasRenderingContext2D;
     isBooted: boolean;
     isRunning: boolean;
-    constructor();
+    private _initCallback;
+    constructor(init: (game: Game) => void);
     boot(): void;
     createDebugCanvas(width?: number, height?: number): void;
     drawImage(image: CanvasImageSource, x?: number, y?: number): void;
