@@ -23,9 +23,11 @@ export function GetAudio (): IDeviceAudioResult
 
     if (result.audioData)
     {
+        const audioElement: HTMLAudioElement = document.createElement('audio');
+
+        // IE9 Running on Windows Server SKU can cause an exception to be thrown
         try
         {
-            const audioElement: HTMLAudioElement = document.createElement('audio');
             const canPlay: boolean = !!audioElement.canPlayType;
 
             if (canPlay)
