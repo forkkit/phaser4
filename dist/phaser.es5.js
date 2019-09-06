@@ -31,6 +31,139 @@ var Game = /** @class */ (function () {
     return Game;
 }());
 
+function isChrome() {
+    var chrome = (/Chrome\/(\d+)/).test(navigator.userAgent);
+    var chromeVersion = (chrome) ? parseInt(RegExp.$1, 10) : 0;
+    return {
+        chrome: chrome,
+        chromeVersion: chromeVersion
+    };
+}
+
+function isEdge() {
+    var edge = (/Edge\/\d+/).test(navigator.userAgent);
+    return {
+        edge: edge
+    };
+}
+
+function isFirefox() {
+    var firefox = (/Firefox\D+(\d+)/).test(navigator.userAgent);
+    var firefoxVersion = (firefox) ? parseInt(RegExp.$1, 10) : 0;
+    return {
+        firefox: firefox,
+        firefoxVersion: firefoxVersion
+    };
+}
+
+function isiOS() {
+    var ua = navigator.userAgent;
+    var result = {
+        iOS: false,
+        iOSVersion: 0,
+        iPhone: false,
+        iPad: false
+    };
+    if (/iP[ao]d|iPhone/i.test(ua)) {
+        (navigator.appVersion).match(/OS (\d+)/);
+        result.iOS = true;
+        result.iOSVersion = parseInt(RegExp.$1, 10);
+        result.iPhone = (ua.toLowerCase().indexOf('iphone') !== -1);
+        result.iPad = (ua.toLowerCase().indexOf('ipad') !== -1);
+    }
+    return result;
+}
+
+function isMobileSafari() {
+    var iOS = isiOS().iOS;
+    var mobileSafari = ((/AppleWebKit/).test(navigator.userAgent) && iOS);
+    return {
+        mobileSafari: mobileSafari
+    };
+}
+
+function isMSIE() {
+    var ie = (/MSIE (\d+\.\d+);/).test(navigator.userAgent);
+    var ieVersion = (ie) ? parseInt(RegExp.$1, 10) : 0;
+    return {
+        ie: ie,
+        ieVersion: ieVersion
+    };
+}
+
+function isOpera() {
+    var opera = (/Opera/).test(navigator.userAgent);
+    return {
+        opera: opera
+    };
+}
+
+function isWindowsPhone() {
+    var ua = navigator.userAgent;
+    return (/Windows Phone/i.test(ua) || (/IEMobile/i).test(ua));
+}
+
+function isSafari() {
+    var ua = navigator.userAgent;
+    var safari = ((/Safari/).test(ua) && !isWindowsPhone());
+    var safariVersion = ((/Version\/(\d+)\./).test(ua)) ? parseInt(RegExp.$1, 10) : 0;
+    return {
+        safari: safari,
+        safariVersion: safariVersion
+    };
+}
+
+function isSilk() {
+    var silk = (/Silk/).test(navigator.userAgent);
+    return {
+        silk: silk
+    };
+}
+
+function isTrident() {
+    var trident = (/Trident\/(\d+\.\d+)(.*)rv:(\d+\.\d+)/).test(navigator.userAgent);
+    var tridentVersion = (trident) ? parseInt(RegExp.$1, 10) : 0;
+    var tridentIEVersion = (trident) ? parseInt(RegExp.$3, 10) : 0;
+    return {
+        trident: trident,
+        tridentVersion: tridentVersion,
+        tridentIEVersion: tridentIEVersion
+    };
+}
+
+function GetBrowser() {
+    var _a = isChrome(), chrome = _a.chrome, chromeVersion = _a.chromeVersion;
+    var edge = isEdge().edge;
+    var _b = isFirefox(), firefox = _b.firefox, firefoxVersion = _b.firefoxVersion;
+    var _c = isMSIE(), ie = _c.ie, ieVersion = _c.ieVersion;
+    var mobileSafari = isMobileSafari().mobileSafari;
+    var opera = isOpera().opera;
+    var _d = isSafari(), safari = _d.safari, safariVersion = _d.safariVersion;
+    var silk = isSilk().silk;
+    var _e = isTrident(), trident = _e.trident, tridentVersion = _e.tridentVersion, tridentIEVersion = _e.tridentIEVersion;
+    if (trident) {
+        ie = true;
+        ieVersion = tridentIEVersion;
+    }
+    var result = {
+        chrome: chrome,
+        chromeVersion: chromeVersion,
+        edge: edge,
+        firefox: firefox,
+        firefoxVersion: firefoxVersion,
+        ie: ie,
+        ieVersion: ieVersion,
+        mobileSafari: mobileSafari,
+        opera: opera,
+        safari: safari,
+        safariVersion: safariVersion,
+        silk: silk,
+        trident: trident,
+        tridentVersion: tridentVersion
+    };
+    return result;
+}
+
 function isAndroid() {
     return (/Android/.test(navigator.userAgent));
 }
@@ -59,24 +192,6 @@ function isElectron() {
     return (isNode() && !!process.versions['electron']);
 }
 
-function isiOS() {
-    var ua = navigator.userAgent;
-    var result = {
-        iOS: false,
-        iOSVersion: 0,
-        iPhone: false,
-        iPad: false
-    };
-    if (/iP[ao]d|iPhone/i.test(ua)) {
-        (navigator.appVersion).match(/OS (\d+)/);
-        result.iOS = true;
-        result.iOSVersion = parseInt(RegExp.$1, 10);
-        result.iPhone = (ua.toLowerCase().indexOf('iphone') !== -1);
-        result.iPad = (ua.toLowerCase().indexOf('ipad') !== -1);
-    }
-    return result;
-}
-
 function isKindle() {
     // This will NOT detect early generations of Kindle Fire, I think there is no reliable way...
     // E.g. "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true"
@@ -103,11 +218,6 @@ function isWebApp() {
 
 function isWindows() {
     return (/Windows/.test(navigator.userAgent));
-}
-
-function isWindowsPhone() {
-    var ua = navigator.userAgent;
-    return (/Windows Phone/i.test(ua) || (/IEMobile/i).test(ua));
 }
 
 function GetOS() {
@@ -152,30 +262,12 @@ function GetOS() {
     return result;
 }
 
-//  @namespace Phaser.Device.OS
-var OS = {
-    Android: isAndroid,
-    ChromeOS: isChromeOS,
-    Cordova: isCordova,
-    Crosswalk: isCrosswalk,
-    Ejecta: isEjecta,
-    Electron: isElectron,
-    GetOS: GetOS,
-    iOS: isiOS,
-    Kindle: isKindle,
-    Linux: isLinux,
-    MacOS: isMacOS,
-    Node: isNode,
-    NodeWebkit: isNodeWebkit,
-    WebApp: isWebApp,
-    Windows: isWindows,
-    WindowsPhone: isWindowsPhone
-};
-
 //  Phaser.Device
 var Device = {
-    OS: OS,
-    GetOS: GetOS
+    GetBrowser: GetBrowser,
+    GetOS: GetOS,
+    Browser: GetBrowser(),
+    OS: GetOS()
 };
 
 function AddToDOM(element, parent) {

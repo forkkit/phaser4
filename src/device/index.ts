@@ -1,9 +1,11 @@
+import { GetBrowser } from './browser/GetBrowser';
 import { GetOS } from './os/GetOS';
-import { OS } from './os/index';
 
 //  Phaser.Device
 
 export const Device = {
-    OS,
-    GetOS
+    GetBrowser,
+    GetOS,
+    Browser: GetBrowser(),
+    OS: GetOS()
 };

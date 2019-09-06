@@ -1,10 +1,10 @@
-export function isChrome (ua: string = navigator.userAgent)
+export function isChrome (): { chrome: boolean, chromeVersion: number }
 {
-    const result = (/Chrome\/(\d+)/).test(ua);
-    const version = parseInt(RegExp.$1, 10);
+    const chrome = (/Chrome\/(\d+)/).test(navigator.userAgent);
+    const chromeVersion = (chrome) ? parseInt(RegExp.$1, 10) : 0;
 
     return {
-        chrome: result,
-        chromeVersion: version
+        chrome,
+        chromeVersion
     };
 }
