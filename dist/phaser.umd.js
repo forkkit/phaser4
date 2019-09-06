@@ -37,6 +37,75 @@
         return Game;
     }());
 
+    function canPlayM4A(audioElement) {
+        if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+        return ((audioElement.canPlayType('audio/x-m4a') !== '') || (audioElement.canPlayType('audio/aac') !== ''));
+    }
+
+    function canPlayMP3(audioElement) {
+        if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+        return (audioElement.canPlayType('audio/mpeg') !== '');
+    }
+
+    function canPlayOGG(audioElement) {
+        if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+        return (audioElement.canPlayType('audio/ogg; codecs="vorbis"') !== '');
+    }
+
+    function canPlayOpus(audioElement) {
+        if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+        return ((audioElement.canPlayType('audio/ogg; codecs="opus"') !== '') || (audioElement.canPlayType('audio/opus') !== ''));
+    }
+
+    function canPlayWAV(audioElement) {
+        if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+        return (audioElement.canPlayType('audio/wav; codecs="1"') !== '');
+    }
+
+    function canPlayWebM(audioElement) {
+        if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+        return (audioElement.canPlayType('audio/webm; codecs="vorbis"') !== '');
+    }
+
+    function hasAudio() {
+        return (window.hasOwnProperty('Audio'));
+    }
+
+    function hasWebAudio() {
+        return (window.hasOwnProperty('AudioContext') || window.hasOwnProperty('webkitAudioContext'));
+    }
+
+    function GetAudio() {
+        var result = {
+            audioData: hasAudio(),
+            m4a: false,
+            mp3: false,
+            ogg: false,
+            opus: false,
+            wav: false,
+            webAudio: hasWebAudio(),
+            webm: false
+        };
+        if (result.audioData) {
+            try {
+                var audioElement = document.createElement('audio');
+                var canPlay = !!audioElement.canPlayType;
+                if (canPlay) {
+                    result.m4a = canPlayM4A(audioElement);
+                    result.mp3 = canPlayMP3(audioElement);
+                    result.ogg = canPlayOGG(audioElement);
+                    result.opus = canPlayOpus(audioElement);
+                    result.wav = canPlayWAV(audioElement);
+                    result.webm = canPlayWebM(audioElement);
+                }
+            }
+            catch (error) {
+                result.audioData = false;
+            }
+        }
+        return result;
+    }
+
     function isChrome() {
         var chrome = (/Chrome\/(\d+)/).test(navigator.userAgent);
         var chromeVersion = (chrome) ? parseInt(RegExp.$1, 10) : 0;
@@ -270,8 +339,10 @@
 
     //  Phaser.Device
     var Device = {
+        GetAudio: GetAudio,
         GetBrowser: GetBrowser,
         GetOS: GetOS,
+        Audio: GetAudio(),
         Browser: GetBrowser(),
         OS: GetOS()
     };
