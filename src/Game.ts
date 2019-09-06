@@ -8,25 +8,31 @@ export class Game
 
     isBooted: boolean = false;
     isRunning: boolean = false;
+    
+    private _initCallback: (game: Game) => void;
 
-    constructor ()
+    constructor (init: (game: Game) => void)
     {
+        this._initCallback = init;
+
         DOMContentLoaded(() => this.boot());
     }
 
     boot ()
     {
+        console.log('Phaser 4.0.0-alpha.3');
+
         this.isBooted = true;
 
         this.createDebugCanvas();
 
         AddToDOM(this.canvas);
+
+        this._initCallback(this);
     }
 
     createDebugCanvas (width: number = 800, height: number = 600)
     {
-        console.log('Phaser 4.0.0-alpha.3');
-
         this.canvas = document.createElement('canvas');
 
         this.canvas.width = width;
