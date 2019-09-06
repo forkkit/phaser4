@@ -23,12 +23,11 @@ export function GetAudio (): IDeviceAudioResult
 
     if (result.audioData)
     {
-        const audioElement: HTMLAudioElement = document.createElement('audio');
-
-        const canPlay = !!audioElement.canPlayType;
-
         try
         {
+            const audioElement: HTMLAudioElement = document.createElement('audio');
+            const canPlay: boolean = !!audioElement.canPlayType;
+
             if (canPlay)
             {
                 result.m4a = canPlayM4A(audioElement);
