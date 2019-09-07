@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      "moduleResolution": "node",
+      "target": "es6",
+      "module": "es2015",
+      "lib": [ "dom", "es5", "es6", "es7", "esnext" ],
+      "declaration": true,
+      "declarationDir": "./types",
+      "declarationMap": true,
+      "sourceMap": true,
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "downlevelIteration": true
+    },
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [ "node_modules" ]
+}

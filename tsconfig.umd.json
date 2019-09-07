@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "moduleResolution": "node",
+      "target": "es5",
+      "lib": [ "dom", "es5", "es6", "es7", "esnext" ],
+      "declaration": false,
+      "sourceMap": true,
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "downlevelIteration": true
+    },
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [ "node_modules" ]
+}

@@ -2,11 +2,8 @@
     "compilerOptions": {
       "moduleResolution": "node",
       "target": "es5",
-      "module": "es2015",
       "lib": [ "dom", "es5", "es6", "es7", "esnext" ],
-      "declaration": true,
-      "declarationDir": "./types",
-      "declarationMap": true,
+      "declaration": false,
       "sourceMap": true,
       "allowSyntheticDefaultImports": true,
       "experimentalDecorators": true,

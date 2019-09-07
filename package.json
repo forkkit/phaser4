@@ -9,8 +9,12 @@
   "typings": "types/index.d.ts",
   "scripts": {
     "pub": "npm publish --tag alpha",
-    "build": "rollup -c",
-    "watch": "rollup -cw"
+    "build-es": "rollup --config rollup.config.es.js",
+    "watch-es": "rollup --watch --config rollup.config.es.js",
+    "build-umd": "rollup --config rollup.config.umd.js",
+    "watch-umd": "rollup --watch --config rollup.config.umd.js",
+    "build-iife": "rollup --config rollup.config.iife.js",
+    "watch-iife": "rollup --watch --config rollup.config.iife.js"
   },
   "repository": {
     "type": "git",
