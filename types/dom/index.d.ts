@@ -1,9 +1,4 @@
-import { AddToDOM } from './AddToDOM';
-import { DOMContentLoaded } from './DOMContentLoaded';
-import { RemoveFromDOM } from './RemoveFromDOM';
-export declare const DOM: {
-    AddToDOM: typeof AddToDOM;
-    DOMContentLoaded: typeof DOMContentLoaded;
-    RemoveFromDOM: typeof RemoveFromDOM;
-};
+export { AddToDOM } from './AddToDOM';
+export { DOMContentLoaded } from './DOMContentLoaded';
+export { RemoveFromDOM } from './RemoveFromDOM';
 //# sourceMappingURL=index.d.ts.map

@@ -1,4 +1,4 @@
-export declare class Game {
+export default class Game {
     canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
     isBooted: boolean;
