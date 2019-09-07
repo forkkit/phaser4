@@ -24,7 +24,7 @@
         "newline-before-return": true,
         "indent": [ true, "spaces", 4 ],
         "semicolon": [ true, "always" ],
-        "no-namespace": false,
+        "no-namespace": true,
         "no-string-literal": false,
         "member-access": [ true, "no-public" ]
     },
