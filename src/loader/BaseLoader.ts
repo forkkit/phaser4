@@ -4,24 +4,24 @@ import { FileState } from './FileState';
 
 export class BaseLoader
 {
-    public fileGroup: string = '';
-    public prefix: string = '';
-    public baseURL: string = '';
-    public path: string = '';
-    public maxParallelDownloads: number = 32;
-    public crossOrigin: string = '';
+    fileGroup: string = '';
+    prefix: string = '';
+    baseURL: string = '';
+    path: string = '';
+    maxParallelDownloads: number = 32;
+    crossOrigin: string = '';
 
-    public state: BaseLoaderState = BaseLoaderState.IDLE;
+    state: BaseLoaderState = BaseLoaderState.IDLE;
 
-    public progress: number = 0;
+    progress: number = 0;
 
-    public totalToLoad: number = 0;
-    public totalFailed: number = 0;
-    public totalComplete: number = 0;
+    totalToLoad: number = 0;
+    totalFailed: number = 0;
+    totalComplete: number = 0;
 
-    public list: Set<IFile> = new Set();
-    public inflight: Set<IFile> = new Set();
-    public queue: Set<IFile> = new Set();
+    list: Set<IFile> = new Set();
+    inflight: Set<IFile> = new Set();
+    queue: Set<IFile> = new Set();
 
     private _deleteQueue: Set<IFile> = new Set();
 
@@ -30,7 +30,7 @@ export class BaseLoader
         this.state = BaseLoaderState.IDLE;
     }
 
-    public setBaseURL (value: string = '')
+    setBaseURL (value: string = '')
     {
         if (value !== '' && value.substr(-1) !== '/')
         {
@@ -42,7 +42,7 @@ export class BaseLoader
         return this;
     }
 
-    public setPath (value: string = '')
+    setPath (value: string = '')
     {
         if (value !== '' && value.substr(-1) !== '/')
         {
@@ -54,24 +54,24 @@ export class BaseLoader
         return this;
     }
 
-    public setFileGroup (name: string = '')
+    setFileGroup (name: string = '')
     {
         this.fileGroup = name;
 
         return this;
     }
 
-    public isLoading (): boolean
+    isLoading (): boolean
     {
         return (this.state === BaseLoaderState.LOADING || this.state === BaseLoaderState.PROCESSING);
     }
 
-    public isReady (): boolean
+    isReady (): boolean
     {
         return (this.state === BaseLoaderState.IDLE || this.state === BaseLoaderState.COMPLETE);
     }
 
-    public addFile (file: IFile): Promise<any>
+    addFile (file: IFile): Promise<any>
     {
         console.log('addFile');
 
@@ -91,7 +91,7 @@ export class BaseLoader
         );
     }
 
-    public start ()
+    start ()
     {
         if (!this.isReady())
         {

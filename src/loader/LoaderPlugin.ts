@@ -8,7 +8,7 @@ export class LoaderPlugin extends BaseLoader
         super();
     }
 
-    public image (key: string, url: string = ''): Promise<any>
+    image (key: string, url: string = ''): Promise<any>
     {
         return this.addFile(ImageFile(key, url));
     }
