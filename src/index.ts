@@ -1,5 +1,6 @@
+//  @namespace Phaser
+
+export * from './device/';
+export * from './dom/';
+export * from './loader/';
 export * from './Game';
-export * from './device/index';
-export * from './dom/index';
-export * from './loader/index';
-export * from './Version';

@@ -1,7 +1,7 @@
 import { AddToDOM } from './dom/AddToDOM';
 import { DOMContentLoaded } from './dom/DOMContentLoaded';
 
-export class Game
+export default class Game
 {
     canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
