@@ -1,126 +1,24 @@
-function AddToDOM(element, parent) {
-    var target;
-    if (parent) {
-        if (typeof parent === 'string') {
-            //  Hopefully an element ID
-            target = document.getElementById(parent);
-        }
-        else if (typeof parent === 'object' && parent.nodeType === 1) {
-            //  Quick test for a HTMLElement
-            target = parent;
-        }
-    }
-    else if (element.parentElement) {
-        return element;
-    }
-    //  Fallback, covers an invalid ID and a non HTMLElement object
-    if (!target) {
-        target = document.body;
-    }
-    target.appendChild(element);
-    return element;
-}
-
-function isCordova() {
-    return (window.hasOwnProperty('cordova'));
-}
-
-function DOMContentLoaded(callback) {
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        callback();
-        return;
-    }
-    var check = function () {
-        document.removeEventListener('deviceready', check, true);
-        document.removeEventListener('DOMContentLoaded', check, true);
-        window.removeEventListener('load', check, true);
-        callback();
-    };
-    if (!document.body) {
-        window.setTimeout(check, 20);
-    }
-    else if (isCordova()) {
-        document.addEventListener('deviceready', check, true);
-    }
-    else {
-        document.addEventListener('DOMContentLoaded', check, true);
-        window.addEventListener('load', check, true);
-    }
-}
-
-var Game = /** @class */ (function () {
-    function Game(init) {
-        var _this = this;
-        this.isBooted = false;
-        this.isRunning = false;
-        this._initCallback = init;
-        DOMContentLoaded(function () { return _this.boot(); });
-    }
-    Game.prototype.boot = function () {
-        console.log('Phaser 4.0.0-alpha.3');
-        this.isBooted = true;
-        this.createDebugCanvas();
-        AddToDOM(this.canvas);
-        this._initCallback(this);
-    };
-    Game.prototype.createDebugCanvas = function (width, height) {
-        if (width === void 0) { width = 800; }
-        if (height === void 0) { height = 600; }
-        this.canvas = document.createElement('canvas');
-        this.canvas.width = width;
-        this.canvas.height = height;
-        this.context = this.canvas.getContext('2d');
-        this.context.fillStyle = '#2d2d2d';
-        this.context.fillRect(0, 0, width, height);
-    };
-    Game.prototype.drawImage = function (image, x, y) {
-        if (x === void 0) { x = 0; }
-        if (y === void 0) { y = 0; }
-        this.context.drawImage(image, x, y);
-    };
-    Game.prototype.draw = function (text) {
-        this.context.fillStyle = '#ff0000';
-        this.context.fillText(text, 10, 40);
-        this.context.fillStyle = '#0000ff';
-        this.context.fillText(text, 10, 20);
-        this.context.fillStyle = '#ffff00';
-        this.context.fillText(text, 10, 60);
-    };
-    Game.prototype.text = function (x, y, text) {
-        this.context.fillStyle = '#00ff00';
-        this.context.font = '16px Courier';
-        this.context.fillText(text, x, y);
-    };
-    return Game;
-}());
-
-function canPlayM4A(audioElement) {
-    if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+function canPlayM4A(audioElement = document.createElement('audio')) {
     return ((audioElement.canPlayType('audio/x-m4a') !== '') || (audioElement.canPlayType('audio/aac') !== ''));
 }
 
-function canPlayMP3(audioElement) {
-    if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+function canPlayMP3(audioElement = document.createElement('audio')) {
     return (audioElement.canPlayType('audio/mpeg; codecs="mp3"') !== '');
 }
 
-function canPlayOGG(audioElement) {
-    if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+function canPlayOGG(audioElement = document.createElement('audio')) {
     return (audioElement.canPlayType('audio/ogg; codecs="vorbis"') !== '');
 }
 
-function canPlayOpus(audioElement) {
-    if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+function canPlayOpus(audioElement = document.createElement('audio')) {
     return ((audioElement.canPlayType('audio/ogg; codecs="opus"') !== '') || (audioElement.canPlayType('audio/webm; codecs="opus"') !== ''));
 }
 
-function canPlayWAV(audioElement) {
-    if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+function canPlayWAV(audioElement = document.createElement('audio')) {
     return (audioElement.canPlayType('audio/wav; codecs="1"') !== '');
 }
 
-function canPlayWebM(audioElement) {
-    if (audioElement === void 0) { audioElement = document.createElement('audio'); }
+function canPlayWebM(audioElement = document.createElement('audio')) {
     return (audioElement.canPlayType('audio/webm; codecs="vorbis"') !== '');
 }
 
@@ -133,7 +31,7 @@ function hasWebAudio() {
 }
 
 function GetAudio() {
-    var result = {
+    const result = {
         audioData: hasAudio(),
         m4a: false,
         mp3: false,
@@ -144,10 +42,10 @@ function GetAudio() {
         webm: false
     };
     if (result.audioData) {
-        var audioElement = document.createElement('audio');
+        const audioElement = document.createElement('audio');
         // IE9 Running on Windows Server SKU can cause an exception to be thrown
         try {
-            var canPlay = !!audioElement.canPlayType;
+            const canPlay = !!audioElement.canPlayType;
             if (canPlay) {
                 result.m4a = canPlayM4A(audioElement);
                 result.mp3 = canPlayMP3(audioElement);
@@ -165,33 +63,33 @@ function GetAudio() {
 }
 
 function isChrome() {
-    var chrome = (/Chrome\/(\d+)/).test(navigator.userAgent);
-    var chromeVersion = (chrome) ? parseInt(RegExp.$1, 10) : 0;
+    const chrome = (/Chrome\/(\d+)/).test(navigator.userAgent);
+    const chromeVersion = (chrome) ? parseInt(RegExp.$1, 10) : 0;
     return {
-        chrome: chrome,
-        chromeVersion: chromeVersion
+        chrome,
+        chromeVersion
     };
 }
 
 function isEdge() {
-    var edge = (/Edge\/\d+/).test(navigator.userAgent);
+    const edge = (/Edge\/\d+/).test(navigator.userAgent);
     return {
-        edge: edge
+        edge
     };
 }
 
 function isFirefox() {
-    var firefox = (/Firefox\D+(\d+)/).test(navigator.userAgent);
-    var firefoxVersion = (firefox) ? parseInt(RegExp.$1, 10) : 0;
+    const firefox = (/Firefox\D+(\d+)/).test(navigator.userAgent);
+    const firefoxVersion = (firefox) ? parseInt(RegExp.$1, 10) : 0;
     return {
-        firefox: firefox,
-        firefoxVersion: firefoxVersion
+        firefox,
+        firefoxVersion
     };
 }
 
 function isiOS() {
-    var ua = navigator.userAgent;
-    var result = {
+    const ua = navigator.userAgent;
+    const result = {
         iOS: false,
         iOSVersion: 0,
         iPhone: false,
@@ -208,91 +106,91 @@ function isiOS() {
 }
 
 function isMobileSafari() {
-    var iOS = isiOS().iOS;
-    var mobileSafari = ((/AppleWebKit/).test(navigator.userAgent) && iOS);
+    const { iOS } = isiOS();
+    const mobileSafari = ((/AppleWebKit/).test(navigator.userAgent) && iOS);
     return {
-        mobileSafari: mobileSafari
+        mobileSafari
     };
 }
 
 function isMSIE() {
-    var ie = (/MSIE (\d+\.\d+);/).test(navigator.userAgent);
-    var ieVersion = (ie) ? parseInt(RegExp.$1, 10) : 0;
+    const ie = (/MSIE (\d+\.\d+);/).test(navigator.userAgent);
+    const ieVersion = (ie) ? parseInt(RegExp.$1, 10) : 0;
     return {
-        ie: ie,
-        ieVersion: ieVersion
+        ie,
+        ieVersion
     };
 }
 
 function isOpera() {
-    var opera = (/Opera/).test(navigator.userAgent);
+    const opera = (/Opera/).test(navigator.userAgent);
     return {
-        opera: opera
+        opera
     };
 }
 
 function isWindowsPhone() {
-    var ua = navigator.userAgent;
+    const ua = navigator.userAgent;
     return (/Windows Phone/i.test(ua) || (/IEMobile/i).test(ua));
 }
 
 function isSafari() {
-    var ua = navigator.userAgent;
-    var safari = ((/Safari/).test(ua) && !isWindowsPhone());
-    var safariVersion = ((/Version\/(\d+)\./).test(ua)) ? parseInt(RegExp.$1, 10) : 0;
+    const ua = navigator.userAgent;
+    const safari = ((/Safari/).test(ua) && !isWindowsPhone());
+    const safariVersion = ((/Version\/(\d+)\./).test(ua)) ? parseInt(RegExp.$1, 10) : 0;
     return {
-        safari: safari,
-        safariVersion: safariVersion
+        safari,
+        safariVersion
     };
 }
 
 function isSilk() {
-    var silk = (/Silk/).test(navigator.userAgent);
+    const silk = (/Silk/).test(navigator.userAgent);
     return {
-        silk: silk
+        silk
     };
 }
 
 function isTrident() {
-    var trident = (/Trident\/(\d+\.\d+)(.*)rv:(\d+\.\d+)/).test(navigator.userAgent);
-    var tridentVersion = (trident) ? parseInt(RegExp.$1, 10) : 0;
-    var tridentIEVersion = (trident) ? parseInt(RegExp.$3, 10) : 0;
+    const trident = (/Trident\/(\d+\.\d+)(.*)rv:(\d+\.\d+)/).test(navigator.userAgent);
+    const tridentVersion = (trident) ? parseInt(RegExp.$1, 10) : 0;
+    const tridentIEVersion = (trident) ? parseInt(RegExp.$3, 10) : 0;
     return {
-        trident: trident,
-        tridentVersion: tridentVersion,
-        tridentIEVersion: tridentIEVersion
+        trident,
+        tridentVersion,
+        tridentIEVersion
     };
 }
 
 function GetBrowser() {
-    var _a = isChrome(), chrome = _a.chrome, chromeVersion = _a.chromeVersion;
-    var edge = isEdge().edge;
-    var _b = isFirefox(), firefox = _b.firefox, firefoxVersion = _b.firefoxVersion;
-    var _c = isMSIE(), ie = _c.ie, ieVersion = _c.ieVersion;
-    var mobileSafari = isMobileSafari().mobileSafari;
-    var opera = isOpera().opera;
-    var _d = isSafari(), safari = _d.safari, safariVersion = _d.safariVersion;
-    var silk = isSilk().silk;
-    var _e = isTrident(), trident = _e.trident, tridentVersion = _e.tridentVersion, tridentIEVersion = _e.tridentIEVersion;
+    const { chrome, chromeVersion } = isChrome();
+    const { edge } = isEdge();
+    const { firefox, firefoxVersion } = isFirefox();
+    let { ie, ieVersion } = isMSIE();
+    const { mobileSafari } = isMobileSafari();
+    const { opera } = isOpera();
+    const { safari, safariVersion } = isSafari();
+    const { silk } = isSilk();
+    const { trident, tridentVersion, tridentIEVersion } = isTrident();
     if (trident) {
         ie = true;
         ieVersion = tridentIEVersion;
     }
-    var result = {
-        chrome: chrome,
-        chromeVersion: chromeVersion,
-        edge: edge,
-        firefox: firefox,
-        firefoxVersion: firefoxVersion,
-        ie: ie,
-        ieVersion: ieVersion,
-        mobileSafari: mobileSafari,
-        opera: opera,
-        safari: safari,
-        safariVersion: safariVersion,
-        silk: silk,
-        trident: trident,
-        tridentVersion: tridentVersion
+    const result = {
+        chrome,
+        chromeVersion,
+        edge,
+        firefox,
+        firefoxVersion,
+        ie,
+        ieVersion,
+        mobileSafari,
+        opera,
+        safari,
+        safariVersion,
+        silk,
+        trident,
+        tridentVersion
     };
     return result;
 }
@@ -303,6 +201,10 @@ function isAndroid() {
 
 function isChromeOS() {
     return (/CrOS/.test(navigator.userAgent));
+}
+
+function isCordova() {
+    return (window.hasOwnProperty('cordova'));
 }
 
 function isCrosswalk() {
@@ -324,7 +226,7 @@ function isElectron() {
 function isKindle() {
     // This will NOT detect early generations of Kindle Fire, I think there is no reliable way...
     // E.g. "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true"
-    var ua = navigator.userAgent;
+    const ua = navigator.userAgent;
     return ((/Kindle/.test(ua) || (/\bKF[A-Z][A-Z]+/).test(ua) || (/Silk.*Mobile Safari/).test(ua)));
 }
 
@@ -333,7 +235,7 @@ function isLinux() {
 }
 
 function isMacOS() {
-    var ua = navigator.userAgent;
+    const ua = navigator.userAgent;
     return (/Mac OS/.test(ua) && !(/like Mac OS/.test(ua)));
 }
 
@@ -350,9 +252,9 @@ function isWindows() {
 }
 
 function GetOS() {
-    var ua = navigator.userAgent;
-    var _a = isiOS(), iOS = _a.iOS, iOSVersion = _a.iOSVersion, iPad = _a.iPad, iPhone = _a.iPhone;
-    var result = {
+    const ua = navigator.userAgent;
+    const { iOS, iOSVersion, iPad, iPhone } = isiOS();
+    const result = {
         android: isAndroid(),
         chromeOS: isChromeOS(),
         cordova: isCordova(),
@@ -360,10 +262,10 @@ function GetOS() {
         desktop: false,
         ejecta: isEjecta(),
         electron: isElectron(),
-        iOS: iOS,
-        iOSVersion: iOSVersion,
-        iPad: iPad,
-        iPhone: iPhone,
+        iOS,
+        iOSVersion,
+        iPad,
+        iPhone,
         kindle: isKindle(),
         linux: isLinux(),
         macOS: isMacOS(),
@@ -380,7 +282,7 @@ function GetOS() {
         result.macOS = false;
         result.windows = true;
     }
-    var silk = (/Silk/).test(ua);
+    const silk = (/Silk/).test(ua);
     if (result.windows || result.macOS || (result.linux && !silk) || result.chromeOS) {
         result.desktop = true;
     }
@@ -391,33 +293,28 @@ function GetOS() {
     return result;
 }
 
-function canPlayH264Video(videoElement) {
-    if (videoElement === void 0) { videoElement = document.createElement('video'); }
+function canPlayH264Video(videoElement = document.createElement('video')) {
     return (videoElement.canPlayType('video/mp4; codecs="avc1.42E01E"') !== '');
 }
 
-function canPlayHLSVideo(videoElement) {
-    if (videoElement === void 0) { videoElement = document.createElement('video'); }
+function canPlayHLSVideo(videoElement = document.createElement('video')) {
     return (videoElement.canPlayType('application/x-mpegURL; codecs="avc1.42E01E"') !== '');
 }
 
-function canPlayOGGVideo(videoElement) {
-    if (videoElement === void 0) { videoElement = document.createElement('video'); }
+function canPlayOGGVideo(videoElement = document.createElement('video')) {
     return (videoElement.canPlayType('video/ogg; codecs="theora"') !== '');
 }
 
-function canPlayVP9Video(videoElement) {
-    if (videoElement === void 0) { videoElement = document.createElement('video'); }
+function canPlayVP9Video(videoElement = document.createElement('video')) {
     return (videoElement.canPlayType('video/webm; codecs="vp9"') !== '');
 }
 
-function canPlayWebMVideo(videoElement) {
-    if (videoElement === void 0) { videoElement = document.createElement('video'); }
+function canPlayWebMVideo(videoElement = document.createElement('video')) {
     return (videoElement.canPlayType('video/webm; codecs="vp8, vorbis"') !== '');
 }
 
 function GetVideo() {
-    var result = {
+    const result = {
         h264Video: false,
         hlsVideo: false,
         mp4Video: false,
@@ -425,10 +322,10 @@ function GetVideo() {
         vp9Video: false,
         webmVideo: false
     };
-    var videoElement = document.createElement('video');
+    const videoElement = document.createElement('video');
     // IE9 Running on Windows Server SKU can cause an exception to be thrown
     try {
-        var canPlay = !!videoElement.canPlayType;
+        const canPlay = !!videoElement.canPlayType;
         if (canPlay) {
             result.h264Video = canPlayH264Video(videoElement);
             result.hlsVideo = canPlayHLSVideo(videoElement);
@@ -445,86 +342,56 @@ function GetVideo() {
     return result;
 }
 
-//  Phaser.Device
-var Device = {
-    GetAudio: GetAudio,
-    GetBrowser: GetBrowser,
-    GetOS: GetOS,
-    GetVideo: GetVideo,
-    Audio: GetAudio(),
-    Browser: GetBrowser(),
-    OS: GetOS(),
-    Video: GetVideo()
-};
+function AddToDOM(element, parent) {
+    let target;
+    if (parent) {
+        if (typeof parent === 'string') {
+            //  Hopefully an element ID
+            target = document.getElementById(parent);
+        }
+        else if (typeof parent === 'object' && parent.nodeType === 1) {
+            //  Quick test for a HTMLElement
+            target = parent;
+        }
+    }
+    else if (element.parentElement) {
+        return element;
+    }
+    //  Fallback, covers an invalid ID and a non HTMLElement object
+    if (!target) {
+        target = document.body;
+    }
+    target.appendChild(element);
+    return element;
+}
+
+function DOMContentLoaded(callback) {
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        callback();
+        return;
+    }
+    const check = () => {
+        document.removeEventListener('deviceready', check, true);
+        document.removeEventListener('DOMContentLoaded', check, true);
+        window.removeEventListener('load', check, true);
+        callback();
+    };
+    if (!document.body) {
+        window.setTimeout(check, 20);
+    }
+    else if (isCordova()) {
+        document.addEventListener('deviceready', check, true);
+    }
+    else {
+        document.addEventListener('DOMContentLoaded', check, true);
+        window.addEventListener('load', check, true);
+    }
+}
 
 function RemoveFromDOM(element) {
     if (element.parentNode) {
         element.parentNode.removeChild(element);
     }
-}
-
-//  @namespace Phaser.DOM
-var DOM = {
-    AddToDOM: AddToDOM,
-    DOMContentLoaded: DOMContentLoaded,
-    RemoveFromDOM: RemoveFromDOM
-};
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-function __values(o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-}
-
-function __read(o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
 }
 
 var BaseLoaderState;
@@ -552,8 +419,8 @@ var FileState;
     FileState[FileState["ABORTED"] = 10] = "ABORTED";
 })(FileState || (FileState = {}));
 
-var BaseLoader = /** @class */ (function () {
-    function BaseLoader() {
+class BaseLoader {
+    constructor() {
         this.fileGroup = '';
         this.prefix = '';
         this.baseURL = '';
@@ -571,45 +438,42 @@ var BaseLoader = /** @class */ (function () {
         this._deleteQueue = new Set();
         this.state = BaseLoaderState.IDLE;
     }
-    BaseLoader.prototype.setBaseURL = function (value) {
-        if (value === void 0) { value = ''; }
+    setBaseURL(value = '') {
         if (value !== '' && value.substr(-1) !== '/') {
             value = value.concat('/');
         }
         this.baseURL = value;
         return this;
-    };
-    BaseLoader.prototype.setPath = function (value) {
-        if (value === void 0) { value = ''; }
+    }
+    setPath(value = '') {
         if (value !== '' && value.substr(-1) !== '/') {
             value = value.concat('/');
         }
         this.path = value;
         return this;
-    };
-    BaseLoader.prototype.setFileGroup = function (name) {
-        if (name === void 0) { name = ''; }
+    }
+    setFileGroup(name = '') {
         this.fileGroup = name;
         return this;
-    };
-    BaseLoader.prototype.isLoading = function () {
+    }
+    isLoading() {
         return (this.state === BaseLoaderState.LOADING || this.state === BaseLoaderState.PROCESSING);
-    };
-    BaseLoader.prototype.isReady = function () {
+    }
+    isReady() {
         return (this.state === BaseLoaderState.IDLE || this.state === BaseLoaderState.COMPLETE);
-    };
-    BaseLoader.prototype.addFile = function (file) {
+    }
+    addFile(file) {
         console.log('addFile');
         this.getURL(file);
         this.list.add(file);
         this.totalToLoad++;
         console.log(file);
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             file.fileResolve = resolve;
             file.fileReject = reject;
         });
-    };
-    BaseLoader.prototype.start = function () {
+    }
+    start() {
         if (!this.isReady()) {
             return;
         }
@@ -628,47 +492,35 @@ var BaseLoader = /** @class */ (function () {
             this.updateProgress();
             this.checkLoadQueue();
         }
-    };
-    BaseLoader.prototype.getURL = function (file) {
+    }
+    getURL(file) {
         if (file.url.match(/^(?:blob:|data:|http:\/\/|https:\/\/|\/\/)/)) {
             return file;
         }
         else {
             file.url = this.baseURL + this.path + file.url;
         }
-    };
-    BaseLoader.prototype.updateProgress = function () {
+    }
+    updateProgress() {
         this.progress = 1 - ((this.list.size + this.inflight.size) / this.totalToLoad);
-    };
-    BaseLoader.prototype.checkLoadQueue = function () {
-        var e_1, _a;
-        var _this = this;
-        try {
-            for (var _b = __values(this.list), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var entry = _c.value;
-                if ((entry.state === FileState.POPULATED) ||
-                    (entry.state === FileState.PENDING && this.inflight.size < this.maxParallelDownloads)) {
-                    this.inflight.add(entry);
-                    this.list.delete(entry);
-                    //  Apply CORS
-                    entry.load()
-                        .then(function (file) { return _this.nextFile(file, true); })
-                        .catch(function (file) { return _this.nextFile(file, false); });
-                }
-                if (this.inflight.size === this.maxParallelDownloads) {
-                    break;
-                }
+    }
+    checkLoadQueue() {
+        for (const entry of this.list) {
+            if ((entry.state === FileState.POPULATED) ||
+                (entry.state === FileState.PENDING && this.inflight.size < this.maxParallelDownloads)) {
+                this.inflight.add(entry);
+                this.list.delete(entry);
+                //  Apply CORS
+                entry.load()
+                    .then((file) => this.nextFile(file, true))
+                    .catch((file) => this.nextFile(file, false));
+            }
+            if (this.inflight.size === this.maxParallelDownloads) {
+                break;
             }
         }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-    };
-    BaseLoader.prototype.nextFile = function (previousFile, success) {
+    }
+    nextFile(previousFile, success) {
         console.log('nextFile', previousFile, success);
         if (success) {
             this.queue.add(previousFile);
@@ -685,8 +537,8 @@ var BaseLoader = /** @class */ (function () {
             console.log('nextFile calling finishedLoading');
             this.loadComplete();
         }
-    };
-    BaseLoader.prototype.loadComplete = function () {
+    }
+    loadComplete() {
         this.list.clear();
         this.inflight.clear();
         // this.queue.clear();
@@ -695,15 +547,13 @@ var BaseLoader = /** @class */ (function () {
         //  Call 'destroy' on each file ready for deletion
         // this._deleteQueue.iterateLocal('destroy');
         // this._deleteQueue.clear();
-    };
-    return BaseLoader;
-}());
+    }
+}
 
 function XHRLoader(file) {
-    var e_1, _a;
-    var xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     file.xhrLoader = xhr;
-    var config = file.xhrSettings;
+    const config = file.xhrSettings;
     xhr.open('GET', file.url, config.async, config.username, config.password);
     xhr.responseType = config.responseType;
     xhr.timeout = config.timeout;
@@ -714,14 +564,14 @@ function XHRLoader(file) {
     if (config.overrideMimeType) {
         xhr.overrideMimeType(config.overrideMimeType);
     }
-    var onLoadStart = function (event) { return file.onLoadStart(event); };
-    var onLoad = function (event) { return file.onLoad(event); };
-    var onLoadEnd = function (event) { return file.onLoadEnd(event); };
-    var onProgress = function (event) { return file.onProgress(event); };
-    var onTimeout = function (event) { return file.onTimeout(event); };
-    var onAbort = function (event) { return file.onAbort(event); };
-    var onError = function (event) { return file.onError(event); };
-    var eventMap = new Map([
+    const onLoadStart = (event) => file.onLoadStart(event);
+    const onLoad = (event) => file.onLoad(event);
+    const onLoadEnd = (event) => file.onLoadEnd(event);
+    const onProgress = (event) => file.onProgress(event);
+    const onTimeout = (event) => file.onTimeout(event);
+    const onAbort = (event) => file.onAbort(event);
+    const onError = (event) => file.onError(event);
+    const eventMap = new Map([
         ['loadstart', onLoadStart],
         ['load', onLoad],
         ['loadend', onLoadEnd],
@@ -730,33 +580,12 @@ function XHRLoader(file) {
         ['abort', onAbort],
         ['error', onError]
     ]);
-    try {
-        for (var eventMap_1 = __values(eventMap), eventMap_1_1 = eventMap_1.next(); !eventMap_1_1.done; eventMap_1_1 = eventMap_1.next()) {
-            var _b = __read(eventMap_1_1.value, 2), key = _b[0], value = _b[1];
-            xhr.addEventListener(key, value);
-        }
+    for (const [key, value] of eventMap) {
+        xhr.addEventListener(key, value);
     }
-    catch (e_1_1) { e_1 = { error: e_1_1 }; }
-    finally {
-        try {
-            if (eventMap_1_1 && !eventMap_1_1.done && (_a = eventMap_1.return)) _a.call(eventMap_1);
-        }
-        finally { if (e_1) throw e_1.error; }
-    }
-    file.resetXHR = function () {
-        var e_2, _a;
-        try {
-            for (var eventMap_2 = __values(eventMap), eventMap_2_1 = eventMap_2.next(); !eventMap_2_1.done; eventMap_2_1 = eventMap_2.next()) {
-                var _b = __read(eventMap_2_1.value, 2), key = _b[0], value = _b[1];
-                xhr.removeEventListener(key, value);
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (eventMap_2_1 && !eventMap_2_1.done && (_a = eventMap_2.return)) _a.call(eventMap_2);
-            }
-            finally { if (e_2) throw e_2.error; }
+    file.resetXHR = () => {
+        for (const [key, value] of eventMap) {
+            xhr.removeEventListener(key, value);
         }
         // xhr.removeEventListener('loadstart', onLoadStart);
         // xhr.removeEventListener('load', onLoad);
@@ -778,11 +607,10 @@ function XHRLoader(file) {
     xhr.send();
 }
 
-function XHRSettings(config) {
+function XHRSettings(config = { responseType: 'blob', async: true, username: '', password: '', timeout: 0 }) {
     // Before sending a request, set the xhr.responseType to "text",
     // "arraybuffer", "blob", or "document", depending on your data needs.
     // Note, setting xhr.responseType = '' (or omitting) will default the response to "text".
-    if (config === void 0) { config = { responseType: 'blob', async: true, username: '', password: '', timeout: 0 }; }
     return {
         //  Ignored by the Loader, only used by File.
         responseType: config.responseType,
@@ -803,9 +631,9 @@ function XHRSettings(config) {
 
 function File(key, url, type) {
     return {
-        key: key,
-        url: url,
-        type: type,
+        key,
+        url,
+        type,
         xhrLoader: undefined,
         xhrSettings: XHRSettings(),
         data: null,
@@ -813,55 +641,53 @@ function File(key, url, type) {
         bytesLoaded: 0,
         bytesTotal: 0,
         percentComplete: 0,
-        load: function () {
-            var _this = this;
+        load() {
             console.log('File.load', this.key);
             this.state = FileState.PENDING;
             XHRLoader(this);
-            return new Promise(function (resolve, reject) {
-                _this.loaderResolve = resolve;
-                _this.loaderReject = reject;
+            return new Promise((resolve, reject) => {
+                this.loaderResolve = resolve;
+                this.loaderReject = reject;
             });
         },
-        onLoadStart: function (event) {
+        onLoadStart(event) {
             console.log('onLoadStart');
             this.state = FileState.LOADING;
         },
-        onLoad: function (event) {
-            var _this = this;
+        onLoad(event) {
             console.log('onLoad');
-            var xhr = this.xhrLoader;
-            var localFileOk = ((xhr.responseURL && xhr.responseURL.indexOf('file://') === 0 && xhr.status === 0));
-            var success = !(event.target && xhr.status !== 200) || localFileOk;
+            const xhr = this.xhrLoader;
+            const localFileOk = ((xhr.responseURL && xhr.responseURL.indexOf('file://') === 0 && xhr.status === 0));
+            let success = !(event.target && xhr.status !== 200) || localFileOk;
             //  Handle HTTP status codes of 4xx and 5xx as errors, even if xhr.onerror was not called.
             if (xhr.readyState === 4 && xhr.status >= 400 && xhr.status <= 599) {
                 success = false;
             }
             this.onProcess()
-                .then(function () { return _this.onComplete(); })
-                .catch(function () { return _this.onError(); });
+                .then(() => this.onComplete())
+                .catch(() => this.onError());
         },
-        onLoadEnd: function (event) {
+        onLoadEnd(event) {
             console.log('onLoadEnd');
             this.resetXHR();
             this.state = FileState.LOADED;
         },
-        onTimeout: function (event) {
+        onTimeout(event) {
             console.log('onTimeout');
             this.state = FileState.TIMED_OUT;
         },
-        onAbort: function (event) {
+        onAbort(event) {
             console.log('onAbort');
             this.state = FileState.ABORTED;
         },
-        onError: function (event) {
+        onError(event) {
             console.log('onError');
             this.state = FileState.ERRORED;
             if (this.fileReject) {
                 this.fileReject(this);
             }
         },
-        onProgress: function (event) {
+        onProgress(event) {
             console.log('onProgress');
             if (event.lengthComputable) {
                 this.bytesLoaded = event.loaded;
@@ -870,14 +696,14 @@ function File(key, url, type) {
                 console.log(this.percentComplete, '%');
             }
         },
-        onProcess: function () {
+        onProcess() {
             console.log('File.onProcess');
             this.state = FileState.PROCESSING;
-            return new Promise(function (resolve, reject) {
+            return new Promise((resolve, reject) => {
                 resolve();
             });
         },
-        onComplete: function () {
+        onComplete() {
             console.log('onComplete!');
             this.state = FileState.COMPLETE;
             if (this.fileResolve) {
@@ -887,7 +713,7 @@ function File(key, url, type) {
                 this.loaderResolve(this);
             }
         },
-        onDestroy: function () {
+        onDestroy() {
             this.state = FileState.DESTROYED;
         }
     };
@@ -897,26 +723,26 @@ function ImageFile(key, url) {
     if (!url) {
         url = key + '.png';
     }
-    var file = File(key, url, 'image');
+    const file = File(key, url, 'image');
     file.xhrSettings.responseType = 'blob';
-    file.onProcess = function () {
+    file.onProcess = () => {
         console.log('ImageFile.onProcess');
         file.state = FileState.PROCESSING;
-        var image = new Image();
+        const image = new Image();
         file.data = image;
         // if (file.crossOrigin)
         // {
         //     image.crossOrigin = file.crossOrigin;
         // }
-        return new Promise(function (resolve, reject) {
-            image.onload = function () {
+        return new Promise((resolve, reject) => {
+            image.onload = () => {
                 console.log('ImageFile.onload');
                 image.onload = null;
                 image.onerror = null;
                 file.state = FileState.COMPLETE;
                 resolve(file);
             };
-            image.onerror = function (event) {
+            image.onerror = (event) => {
                 console.log('ImageFile.onerror');
                 image.onload = null;
                 image.onerror = null;
@@ -938,47 +764,14 @@ function ImageFile(key, url) {
     return file;
 }
 
-var LoaderPlugin = /** @class */ (function (_super) {
-    __extends(LoaderPlugin, _super);
-    function LoaderPlugin() {
-        return _super.call(this) || this;
+class LoaderPlugin extends BaseLoader {
+    constructor() {
+        super();
     }
-    LoaderPlugin.prototype.image = function (key, url) {
-        if (url === void 0) { url = ''; }
+    image(key, url = '') {
         return this.addFile(ImageFile(key, url));
-    };
-    return LoaderPlugin;
-}(BaseLoader));
-
-/**
- * @namespace Phaser.Loader
- */
-// export interface ILoader {
-//     BaseLoader: BaseLoader;
-//     BaseLoaderState: BaseLoaderState;
-//     File: File;
-//     FileState: FileState;
-//     LoaderPlugin: LoaderPlugin;
-//     XHRLoader;
-//     XHRSettings;
-//     FileTypes: {
-//         ImageFile
-//     };
-// }
-var Loader = {
-    BaseLoader: BaseLoader,
-    BaseLoaderState: BaseLoaderState,
-    File: File,
-    FileState: FileState,
-    LoaderPlugin: LoaderPlugin,
-    XHRLoader: XHRLoader,
-    XHRSettings: XHRSettings,
-    FileTypes: {
-        ImageFile: ImageFile
     }
-};
+}
 
-var VERSION = '4.0.0-alpha.3';
-
-export { DOM, Device, Game, Loader, VERSION };
+export { AddToDOM, BaseLoader, BaseLoaderState, DOMContentLoaded, File, FileState, GetAudio, GetBrowser, GetOS, GetVideo, ImageFile, LoaderPlugin, RemoveFromDOM, XHRLoader, XHRSettings, canPlayH264Video, canPlayHLSVideo, canPlayM4A, canPlayMP3, canPlayOGG, canPlayOGGVideo, canPlayOpus, canPlayVP9Video, canPlayWAV, canPlayWebM, canPlayWebMVideo, hasAudio, hasWebAudio, isAndroid, isChrome, isChromeOS, isCordova, isCrosswalk, isEdge, isEjecta, isElectron, isFirefox, isKindle, isLinux, isMSIE, isMacOS, isMobileSafari, isNode, isNodeWebkit, isOpera, isSafari, isSilk, isTrident, isWebApp, isWindows, isWindowsPhone, isiOS };
 //# sourceMappingURL=phaser.es.js.map

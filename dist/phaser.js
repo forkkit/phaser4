@@ -1,101 +1,5 @@
-var Phaser = (function (exports) {
+var Phaser = (function () {
     'use strict';
-
-    function AddToDOM(element, parent) {
-        var target;
-        if (parent) {
-            if (typeof parent === 'string') {
-                //  Hopefully an element ID
-                target = document.getElementById(parent);
-            }
-            else if (typeof parent === 'object' && parent.nodeType === 1) {
-                //  Quick test for a HTMLElement
-                target = parent;
-            }
-        }
-        else if (element.parentElement) {
-            return element;
-        }
-        //  Fallback, covers an invalid ID and a non HTMLElement object
-        if (!target) {
-            target = document.body;
-        }
-        target.appendChild(element);
-        return element;
-    }
-
-    function isCordova() {
-        return (window.hasOwnProperty('cordova'));
-    }
-
-    function DOMContentLoaded(callback) {
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            callback();
-            return;
-        }
-        var check = function () {
-            document.removeEventListener('deviceready', check, true);
-            document.removeEventListener('DOMContentLoaded', check, true);
-            window.removeEventListener('load', check, true);
-            callback();
-        };
-        if (!document.body) {
-            window.setTimeout(check, 20);
-        }
-        else if (isCordova()) {
-            document.addEventListener('deviceready', check, true);
-        }
-        else {
-            document.addEventListener('DOMContentLoaded', check, true);
-            window.addEventListener('load', check, true);
-        }
-    }
-
-    var Game = /** @class */ (function () {
-        function Game(init) {
-            var _this = this;
-            this.isBooted = false;
-            this.isRunning = false;
-            this._initCallback = init;
-            DOMContentLoaded(function () { return _this.boot(); });
-        }
-        Game.prototype.boot = function () {
-            console.log('Phaser 4.0.0-alpha.3');
-            this.isBooted = true;
-            this.createDebugCanvas();
-            AddToDOM(this.canvas);
-            this._initCallback(this);
-        };
-        Game.prototype.createDebugCanvas = function (width, height) {
-            if (width === void 0) { width = 800; }
-            if (height === void 0) { height = 600; }
-            this.canvas = document.createElement('canvas');
-            this.canvas.width = width;
-            this.canvas.height = height;
-            this.context = this.canvas.getContext('2d');
-            this.context.fillStyle = '#2d2d2d';
-            this.context.fillRect(0, 0, width, height);
-        };
-        Game.prototype.drawImage = function (image, x, y) {
-            if (x === void 0) { x = 0; }
-            if (y === void 0) { y = 0; }
-            this.context.drawImage(image, x, y);
-        };
-        Game.prototype.draw = function (text) {
-            this.context.fillStyle = '#ff0000';
-            this.context.fillText(text, 10, 40);
-            this.context.fillStyle = '#0000ff';
-            this.context.fillText(text, 10, 20);
-            this.context.fillStyle = '#ffff00';
-            this.context.fillText(text, 10, 60);
-        };
-        Game.prototype.text = function (x, y, text) {
-            this.context.fillStyle = '#00ff00';
-            this.context.font = '16px Courier';
-            this.context.fillText(text, x, y);
-        };
-        return Game;
-    }());
 
     function canPlayM4A(audioElement) {
         if (audioElement === void 0) { audioElement = document.createElement('audio'); }
@@ -166,6 +70,23 @@ var Phaser = (function (exports) {
         }
         return result;
     }
+
+    //  @namespace Phaser.Device.Audio
+    var Audio = {
+        canPlayM4A: canPlayM4A,
+        canPlayMP3: canPlayMP3,
+        canPlayOGG: canPlayOGG,
+        canPlayOpus: canPlayOpus,
+        canPlayWAV: canPlayWAV,
+        canPlayWebM: canPlayWebM,
+        GetAudio: GetAudio,
+        hasAudio: hasAudio,
+        hasWebAudio: hasWebAudio
+    };
+
+    var Audio$1 = /*#__PURE__*/Object.freeze({
+        'default': Audio
+    });
 
     function isChrome() {
         var chrome = (/Chrome\/(\d+)/).test(navigator.userAgent);
@@ -300,12 +221,34 @@ var Phaser = (function (exports) {
         return result;
     }
 
+    //  @namespace Phaser.Device.Browser
+    var Browser = {
+        GetBrowser: GetBrowser,
+        isChrome: isChrome,
+        isEdge: isEdge,
+        isFirefox: isFirefox,
+        isMobileSafari: isMobileSafari,
+        isMSIE: isMSIE,
+        isOpera: isOpera,
+        isSafari: isSafari,
+        isSilk: isSilk,
+        isTrident: isTrident
+    };
+
+    var Browser$1 = /*#__PURE__*/Object.freeze({
+        'default': Browser
+    });
+
     function isAndroid() {
         return (/Android/.test(navigator.userAgent));
     }
 
     function isChromeOS() {
         return (/CrOS/.test(navigator.userAgent));
+    }
+
+    function isCordova() {
+        return (window.hasOwnProperty('cordova'));
     }
 
     function isCrosswalk() {
@@ -394,6 +337,30 @@ var Phaser = (function (exports) {
         return result;
     }
 
+    //  @namespace Phaser.Device.OS
+    var OS = {
+        GetOS: GetOS,
+        isAndroid: isAndroid,
+        isChromeOS: isChromeOS,
+        isCordova: isCordova,
+        isCrosswalk: isCrosswalk,
+        isEjecta: isEjecta,
+        isElectron: isElectron,
+        isiOS: isiOS,
+        isKindle: isKindle,
+        isLinux: isLinux,
+        isMacOS: isMacOS,
+        isNode: isNode,
+        isNodeWebkit: isNodeWebkit,
+        isWebApp: isWebApp,
+        isWindows: isWindows,
+        isWindowsPhone: isWindowsPhone
+    };
+
+    var OS$1 = /*#__PURE__*/Object.freeze({
+        'default': OS
+    });
+
     function canPlayH264Video(videoElement) {
         if (videoElement === void 0) { videoElement = document.createElement('video'); }
         return (videoElement.canPlayType('video/mp4; codecs="avc1.42E01E"') !== '');
@@ -448,17 +415,73 @@ var Phaser = (function (exports) {
         return result;
     }
 
-    //  Phaser.Device
-    var Device = {
-        GetAudio: GetAudio,
-        GetBrowser: GetBrowser,
-        GetOS: GetOS,
-        GetVideo: GetVideo,
-        Audio: GetAudio(),
-        Browser: GetBrowser(),
-        OS: GetOS(),
-        Video: GetVideo()
+    //  @namespace Phaser.Device.Video
+    var Video = {
+        canPlayH264Video: canPlayH264Video,
+        canPlayHLSVideo: canPlayHLSVideo,
+        canPlayOGGVideo: canPlayOGGVideo,
+        canPlayVP9Video: canPlayVP9Video,
+        canPlayWebMVideo: canPlayWebMVideo,
+        GetVideo: GetVideo
     };
+
+    var Video$1 = /*#__PURE__*/Object.freeze({
+        'default': Video
+    });
+
+    //  @namespace Phaser.Device
+    var Device = {
+        Audio: Audio$1,
+        Browser: Browser$1,
+        OS: OS$1,
+        Video: Video$1
+    };
+
+    function AddToDOM(element, parent) {
+        var target;
+        if (parent) {
+            if (typeof parent === 'string') {
+                //  Hopefully an element ID
+                target = document.getElementById(parent);
+            }
+            else if (typeof parent === 'object' && parent.nodeType === 1) {
+                //  Quick test for a HTMLElement
+                target = parent;
+            }
+        }
+        else if (element.parentElement) {
+            return element;
+        }
+        //  Fallback, covers an invalid ID and a non HTMLElement object
+        if (!target) {
+            target = document.body;
+        }
+        target.appendChild(element);
+        return element;
+    }
+
+    function DOMContentLoaded(callback) {
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            callback();
+            return;
+        }
+        var check = function () {
+            document.removeEventListener('deviceready', check, true);
+            document.removeEventListener('DOMContentLoaded', check, true);
+            window.removeEventListener('load', check, true);
+            callback();
+        };
+        if (!document.body) {
+            window.setTimeout(check, 20);
+        }
+        else if (isCordova()) {
+            document.addEventListener('deviceready', check, true);
+        }
+        else {
+            document.addEventListener('DOMContentLoaded', check, true);
+            window.addEventListener('load', check, true);
+        }
+    }
 
     function RemoveFromDOM(element) {
         if (element.parentNode) {
@@ -472,6 +495,52 @@ var Phaser = (function (exports) {
         DOMContentLoaded: DOMContentLoaded,
         RemoveFromDOM: RemoveFromDOM
     };
+
+    var Game = /** @class */ (function () {
+        function Game(init) {
+            var _this = this;
+            this.isBooted = false;
+            this.isRunning = false;
+            this._initCallback = init;
+            DOMContentLoaded(function () { return _this.boot(); });
+        }
+        Game.prototype.boot = function () {
+            console.log('Phaser 4.0.0-alpha.3');
+            this.isBooted = true;
+            this.createDebugCanvas();
+            AddToDOM(this.canvas);
+            this._initCallback(this);
+        };
+        Game.prototype.createDebugCanvas = function (width, height) {
+            if (width === void 0) { width = 800; }
+            if (height === void 0) { height = 600; }
+            this.canvas = document.createElement('canvas');
+            this.canvas.width = width;
+            this.canvas.height = height;
+            this.context = this.canvas.getContext('2d');
+            this.context.fillStyle = '#2d2d2d';
+            this.context.fillRect(0, 0, width, height);
+        };
+        Game.prototype.drawImage = function (image, x, y) {
+            if (x === void 0) { x = 0; }
+            if (y === void 0) { y = 0; }
+            this.context.drawImage(image, x, y);
+        };
+        Game.prototype.draw = function (text) {
+            this.context.fillStyle = '#ff0000';
+            this.context.fillText(text, 10, 40);
+            this.context.fillStyle = '#0000ff';
+            this.context.fillText(text, 10, 20);
+            this.context.fillStyle = '#ffff00';
+            this.context.fillText(text, 10, 60);
+        };
+        Game.prototype.text = function (x, y, text) {
+            this.context.fillStyle = '#00ff00';
+            this.context.font = '16px Courier';
+            this.context.fillText(text, x, y);
+        };
+        return Game;
+    }());
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -941,6 +1010,17 @@ var Phaser = (function (exports) {
         return file;
     }
 
+    /**
+     * @namespace Phaser.Loader.FileTypes
+     */
+    var FileTypes = {
+        ImageFile: ImageFile
+    };
+
+    var FileTypes$1 = /*#__PURE__*/Object.freeze({
+        'default': FileTypes
+    });
+
     var LoaderPlugin = /** @class */ (function (_super) {
         __extends(LoaderPlugin, _super);
         function LoaderPlugin() {
@@ -953,21 +1033,7 @@ var Phaser = (function (exports) {
         return LoaderPlugin;
     }(BaseLoader));
 
-    /**
-     * @namespace Phaser.Loader
-     */
-    // export interface ILoader {
-    //     BaseLoader: BaseLoader;
-    //     BaseLoaderState: BaseLoaderState;
-    //     File: File;
-    //     FileState: FileState;
-    //     LoaderPlugin: LoaderPlugin;
-    //     XHRLoader;
-    //     XHRSettings;
-    //     FileTypes: {
-    //         ImageFile
-    //     };
-    // }
+    //  @namespace Phaser.Loader
     var Loader = {
         BaseLoader: BaseLoader,
         BaseLoaderState: BaseLoaderState,
@@ -976,20 +1042,18 @@ var Phaser = (function (exports) {
         LoaderPlugin: LoaderPlugin,
         XHRLoader: XHRLoader,
         XHRSettings: XHRSettings,
-        FileTypes: {
-            ImageFile: ImageFile
-        }
+        FileTypes: FileTypes$1
     };
 
-    var VERSION = '4.0.0-alpha.3';
+    //  @namespace Phaser
+    var Phaser = {
+        Game: Game,
+        Device: Device,
+        DOM: DOM,
+        Loader: Loader
+    };
 
-    exports.DOM = DOM;
-    exports.Device = Device;
-    exports.Game = Game;
-    exports.Loader = Loader;
-    exports.VERSION = VERSION;
+    return Phaser;
 
-    return exports;
-
-}({}));
+}());
 //# sourceMappingURL=phaser.js.map
