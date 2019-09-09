@@ -1,7 +1,9 @@
 // @namespace Phaser.Loader.FileTypes
 
-import * as ImageFile from './ImageFile';
+import { ImageFile } from './ImageFile';
 
-export {
+export default {
     ImageFile
-}
+};
+
+export * from './ImageFile';

@@ -1,0 +1,31 @@
+import { canPlayM4A } from './canPlayM4A';
+import { canPlayMP3 } from './canPlayMP3';
+import { canPlayOGG } from './canPlayOGG';
+import { canPlayOpus } from './canPlayOpus';
+import { canPlayWAV } from './canPlayWAV';
+import { canPlayWebM } from './canPlayWebM';
+import { GetAudio } from './GetAudio';
+import { hasAudio } from './hasAudio';
+import { hasWebAudio } from './hasWebAudio';
+declare const _default: {
+    canPlayM4A: typeof canPlayM4A;
+    canPlayMP3: typeof canPlayMP3;
+    canPlayOGG: typeof canPlayOGG;
+    canPlayOpus: typeof canPlayOpus;
+    canPlayWAV: typeof canPlayWAV;
+    canPlayWebM: typeof canPlayWebM;
+    GetAudio: typeof GetAudio;
+    hasAudio: typeof hasAudio;
+    hasWebAudio: typeof hasWebAudio;
+};
+export default _default;
+export * from './canPlayM4A';
+export * from './canPlayMP3';
+export * from './canPlayOGG';
+export * from './canPlayOpus';
+export * from './canPlayWAV';
+export * from './canPlayWebM';
+export * from './GetAudio';
+export * from './hasAudio';
+export * from './hasWebAudio';
+//# sourceMappingURL=index.d.ts.map

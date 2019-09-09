@@ -1,0 +1,1 @@
+{"version":3,"file":"isiOS.d.ts","sourceRoot":"","sources":["../../../src/device/os/isiOS.ts"],"names":[],"mappings":"AAAA,UAAU,aAAa;IACnB,GAAG,EAAE,OAAO,CAAC;IACb,UAAU,EAAE,MAAM,CAAC;IACnB,MAAM,EAAE,OAAO,CAAC;IAChB,IAAI,EAAE,OAAO,CAAC;CACjB;AAED,wBAAgB,KAAK,IAAK,aAAa,CAsBtC"}

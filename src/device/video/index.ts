@@ -7,7 +7,7 @@ import { canPlayVP9Video } from './canPlayVP9Video';
 import { canPlayWebMVideo } from './canPlayWebMVideo';
 import { GetVideo } from './GetVideo';
 
-export {
+export default {
     canPlayH264Video,
     canPlayHLSVideo,
     canPlayOGGVideo,
@@ -15,3 +15,10 @@ export {
     canPlayWebMVideo,
     GetVideo
 };
+
+export * from './canPlayH264Video';
+export * from './canPlayHLSVideo';
+export * from './canPlayOGGVideo';
+export * from './canPlayVP9Video';
+export * from './canPlayWebMVideo';
+export * from './GetVideo';

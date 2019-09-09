@@ -11,7 +11,7 @@ import { isSafari } from './isSafari';
 import { isSilk } from './isSilk';
 import { isTrident } from './isTrident';
 
-export {
+export default {
     GetBrowser,
     isChrome,
     isEdge,
@@ -23,3 +23,14 @@ export {
     isSilk,
     isTrident
 };
+
+export * from './GetBrowser';
+export * from './isChrome';
+export * from './isEdge';
+export * from './isFirefox';
+export * from './isMobileSafari';
+export * from './isMSIE';
+export * from './isOpera';
+export * from './isSafari';
+export * from './isSilk';
+export * from './isTrident';
