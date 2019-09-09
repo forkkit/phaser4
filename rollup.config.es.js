@@ -6,8 +6,9 @@ const pkg = require('./package.json');
 export default {
     input: 'src/index.ts',
     output: [
-        { file: pkg.module, format: 'es', sourcemap: true }
+        { _dir: './dist', file: pkg.module, format: 'es', sourcemap: true }
     ],
+    preserveModules: false,
     watch: {
         chokidar: true,
         include: './src/**'
