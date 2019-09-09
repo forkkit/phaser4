@@ -1,1 +1,0 @@
-{"version":3,"file":"IDeviceAudioResult.d.ts","sourceRoot":"","sources":["../../../src/device/audio/IDeviceAudioResult.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,kBAAkB;IAE/B,SAAS,EAAE,OAAO,CAAC;IACnB,GAAG,EAAE,OAAO,CAAC;IACb,GAAG,EAAE,OAAO,CAAC;IACb,GAAG,EAAE,OAAO,CAAC;IACb,IAAI,EAAE,OAAO,CAAC;IACd,GAAG,EAAE,OAAO,CAAC;IACb,QAAQ,EAAE,OAAO,CAAC;IAClB,IAAI,EAAE,OAAO,CAAC;CACjB"}

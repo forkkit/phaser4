@@ -4,8 +4,10 @@
       "target": "esnext",
       "module": "es2015",
       "lib": [ "dom", "es5", "es6", "es7", "esnext" ],
+      "esModuleInterop": true,
+      "outDir": "./build",
       "declaration": true,
-      "declarationDir": "./types",
+      "declarationDir": "./build",
       "declarationMap": true,
       "sourceMap": true,
       "allowSyntheticDefaultImports": true,
@@ -13,8 +15,8 @@
       "emitDecoratorMetadata": true,
       "downlevelIteration": true
     },
-    "include": [
-      "src/**/*"
+    "files": [
+      "src/index.ts"
     ],
     "exclude": [ "node_modules" ]
 }

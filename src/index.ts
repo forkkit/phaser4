@@ -2,7 +2,7 @@
 
 import * as Device from './device/';
 import * as DOM from './dom/';
-import * as Game from './Game';
+import { Game } from './Game';
 import * as Loader from './loader/';
 
 export {

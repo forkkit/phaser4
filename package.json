@@ -1,14 +1,14 @@
 {
   "name": "phaser",
-  "version": "4.0.0-alpha.3",
+  "version": "4.0.0-alpha.4",
   "description": "A fast, free and fun HTML5 Game Framework for Desktop and Mobile web browsers.",
-  "main": "dist/phaser.umd.js",
-  "module": "dist/phaser.es.js",
-  "browser": "dist/phaser.js",
-  "types": "types/index.d.ts",
-  "typings": "types/index.d.ts",
+  "XXXmain": "dist/phaser.umd.js",
+  "module": "build/index.js",
+  "XXXbrowser": "dist/phaser.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "pub": "npm publish --tag alpha",
+    "build": "tsc --build tsconfig.es.json",
     "build-es": "rollup --config rollup.config.es.js",
     "watch-es": "rollup --watch --config rollup.config.es.js",
     "build-umd": "rollup --config rollup.config.umd.js",
@@ -16,6 +16,9 @@
     "build-iife": "rollup --config rollup.config.iife.js",
     "watch-iife": "rollup --watch --config rollup.config.iife.js"
   },
+  "files": [
+    "build/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/phaserjs/phaser4.git"
