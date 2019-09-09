@@ -12,5 +12,4 @@ node_modules/
 
 # Build
 /npm-debug.log
-build/
 out/

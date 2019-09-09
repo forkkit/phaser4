@@ -1,0 +1,1 @@
+{"version":3,"file":"isWindowsPhone.js","sourceRoot":"","sources":["../../../../src/device/os/isWindowsPhone.ts"],"names":[],"mappings":"AAAA,MAAM,UAAU,cAAc;IAE1B,MAAM,EAAE,GAAW,SAAS,CAAC,SAAS,CAAC;IAEvC,OAAO,CAAC,gBAAgB,CAAC,IAAI,CAAC,EAAE,CAAC,IAAI,CAAC,WAAW,CAAC,CAAC,IAAI,CAAC,EAAE,CAAC,CAAC,CAAC;AACjE,CAAC"}

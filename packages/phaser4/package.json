@@ -1,0 +1,17 @@
+{
+  "name": "@phaserjs/phaser4",
+  "version": "0.0.4",
+  "description": "Phaser 4 Core Package",
+  "module": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "pub": "npm publish --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phaserjs/phaser4.git"
+  },
+  "author": "Richard Davey <rich@photonstorm.com> (http://www.photonstorm.com)",
+  "homepage": "https://phaser.io",
+  "license": "MIT"
+}

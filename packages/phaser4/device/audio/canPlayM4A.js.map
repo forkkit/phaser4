@@ -1,0 +1,1 @@
+{"version":3,"file":"canPlayM4A.js","sourceRoot":"","sources":["../../../../src/device/audio/canPlayM4A.ts"],"names":[],"mappings":"AAAA,MAAM,UAAU,UAAU,CAAE,eAAiC,QAAQ,CAAC,aAAa,CAAC,OAAO,CAAC;IAExF,OAAO,CAAC,CAAC,YAAY,CAAC,WAAW,CAAC,aAAa,CAAC,KAAK,EAAE,CAAC,IAAI,CAAC,YAAY,CAAC,WAAW,CAAC,WAAW,CAAC,KAAK,EAAE,CAAC,CAAC,CAAC;AAChH,CAAC"}

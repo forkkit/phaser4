@@ -1,0 +1,1 @@
+{"version":3,"file":"isMacOS.js","sourceRoot":"","sources":["../../../../src/device/os/isMacOS.ts"],"names":[],"mappings":"AAAA,MAAM,UAAU,OAAO;IAEnB,MAAM,EAAE,GAAW,SAAS,CAAC,SAAS,CAAC;IAEvC,OAAO,CAAC,QAAQ,CAAC,IAAI,CAAC,EAAE,CAAC,IAAI,CAAC,CAAC,aAAa,CAAC,IAAI,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;AAC5D,CAAC"}

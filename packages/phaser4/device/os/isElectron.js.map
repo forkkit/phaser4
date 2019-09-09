@@ -1,0 +1,1 @@
+{"version":3,"file":"isElectron.js","sourceRoot":"","sources":["../../../../src/device/os/isElectron.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,UAAU,CAAC;AAElC,MAAM,UAAU,UAAU;IAEtB,OAAO,CAAC,MAAM,EAAE,IAAI,CAAC,CAAC,OAAO,CAAC,QAAQ,CAAC,UAAU,CAAC,CAAC,CAAC;AACxD,CAAC"}

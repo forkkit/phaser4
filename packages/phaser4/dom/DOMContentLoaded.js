@@ -1,0 +1,24 @@
+import { isCordova } from '../device/os/isCordova';
+export function DOMContentLoaded(callback) {
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        callback();
+        return;
+    }
+    const check = () => {
+        document.removeEventListener('deviceready', check, true);
+        document.removeEventListener('DOMContentLoaded', check, true);
+        window.removeEventListener('load', check, true);
+        callback();
+    };
+    if (!document.body) {
+        window.setTimeout(check, 20);
+    }
+    else if (isCordova()) {
+        document.addEventListener('deviceready', check, true);
+    }
+    else {
+        document.addEventListener('DOMContentLoaded', check, true);
+        window.addEventListener('load', check, true);
+    }
+}
+//# sourceMappingURL=DOMContentLoaded.js.map

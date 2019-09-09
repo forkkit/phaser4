@@ -3,8 +3,8 @@
   "version": "4.0.0-alpha.4",
   "description": "A fast, free and fun HTML5 Game Framework for Desktop and Mobile web browsers.",
   "XXXmain": "dist/phaser.umd.js",
-  "module": "build/index.js",
   "XXXbrowser": "dist/phaser.js",
+  "module": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
     "pub": "npm publish --tag alpha",
@@ -16,9 +16,6 @@
     "build-iife": "rollup --config rollup.config.iife.js",
     "watch-iife": "rollup --watch --config rollup.config.iife.js"
   },
-  "files": [
-    "build/**/*"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/phaserjs/phaser4.git"
