@@ -1,19 +1,37 @@
 //  @namespace Phaser.Device.OS
 
-export { GetOS } from './GetOS';
-export { IDeviceOSResult } from './IDeviceOSResult';
-export { isAndroid } from './isAndroid';
-export { isChromeOS } from './isChromeOS';
-export { isCordova } from './isCordova';
-export { isCrosswalk } from './isCrosswalk';
-export { isEjecta } from './isEjecta';
-export { isElectron } from './isElectron';
-export { isiOS } from './isiOS';
-export { isKindle } from './isKindle';
-export { isLinux } from './isLinux';
-export { isMacOS } from './isMacOS';
-export { isNode } from './isNode';
-export { isNodeWebkit } from './isNodeWebkit';
-export { isWebApp } from './isWebApp';
-export { isWindows } from './isWindows';
-export { isWindowsPhone } from './isWindowsPhone';
+import { GetOS } from './GetOS';
+import { isAndroid } from './isAndroid';
+import { isChromeOS } from './isChromeOS';
+import { isCordova } from './isCordova';
+import { isCrosswalk } from './isCrosswalk';
+import { isEjecta } from './isEjecta';
+import { isElectron } from './isElectron';
+import { isiOS } from './isiOS';
+import { isKindle } from './isKindle';
+import { isLinux } from './isLinux';
+import { isMacOS } from './isMacOS';
+import { isNode } from './isNode';
+import { isNodeWebkit } from './isNodeWebkit';
+import { isWebApp } from './isWebApp';
+import { isWindows } from './isWindows';
+import { isWindowsPhone } from './isWindowsPhone';
+
+export {
+    GetOS,
+    isAndroid,
+    isChromeOS,
+    isCordova,
+    isCrosswalk,
+    isEjecta,
+    isElectron,
+    isiOS,
+    isKindle,
+    isLinux,
+    isMacOS,
+    isNode,
+    isNodeWebkit,
+    isWebApp,
+    isWindows,
+    isWindowsPhone
+};

@@ -1,9 +1,17 @@
 //  @namespace Phaser.Device.Video
 
-export { canPlayH264Video } from './canPlayH264Video';
-export { canPlayHLSVideo } from './canPlayHLSVideo';
-export { canPlayOGGVideo } from './canPlayOGGVideo';
-export { canPlayVP9Video } from './canPlayVP9Video';
-export { canPlayWebMVideo } from './canPlayWebMVideo';
-export { GetVideo } from './GetVideo';
-export { IDeviceVideoResult } from './IDeviceVideoResult';
+import { canPlayH264Video } from './canPlayH264Video';
+import { canPlayHLSVideo } from './canPlayHLSVideo';
+import { canPlayOGGVideo } from './canPlayOGGVideo';
+import { canPlayVP9Video } from './canPlayVP9Video';
+import { canPlayWebMVideo } from './canPlayWebMVideo';
+import { GetVideo } from './GetVideo';
+
+export {
+    canPlayH264Video,
+    canPlayHLSVideo,
+    canPlayOGGVideo,
+    canPlayVP9Video,
+    canPlayWebMVideo,
+    GetVideo
+};

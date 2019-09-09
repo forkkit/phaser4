@@ -1,11 +1,21 @@
 //  @namespace Phaser.Loader
 
-export { BaseLoader } from './BaseLoader';
-export { BaseLoaderState } from './BaseLoaderState';
-export { File } from './File';
-export { FileState } from './FileState';
-export { LoaderPlugin } from './LoaderPlugin';
-export { XHRLoader } from './XHRLoader';
-export { XHRSettings } from './XHRSettings';
+import { BaseLoader } from './BaseLoader';
+import { BaseLoaderState } from './BaseLoaderState';
+import { File } from './File';
+import { FileState } from './FileState';
+import * as FileTypes from './filetypes/';
+import { LoaderPlugin } from './LoaderPlugin';
+import { XHRLoader } from './XHRLoader';
+import { XHRSettings } from './XHRSettings';
 
-export * from './filetypes/';
+export {
+    BaseLoader,
+    BaseLoaderState,
+    File,
+    FileState,
+    LoaderPlugin,
+    XHRLoader,
+    XHRSettings,
+    FileTypes
+};

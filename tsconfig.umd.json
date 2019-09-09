@@ -1,9 +1,13 @@
 {
     "compilerOptions": {
+      "importHelpers": true,
       "moduleResolution": "node",
+      "module": "es2015",
       "target": "es5",
       "lib": [ "dom", "es5", "es6", "es7", "esnext" ],
-      "declaration": false,
+      "declaration": true,
+      "declarationDir": "./types",
+      "declarationMap": true,
       "sourceMap": true,
       "allowSyntheticDefaultImports": true,
       "experimentalDecorators": true,

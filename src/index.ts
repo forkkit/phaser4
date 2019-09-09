@@ -1,6 +1,13 @@
 //  @namespace Phaser
 
-export * from './device/';
-export * from './dom/';
-export * from './loader/';
-export * from './Game';
+import * as Device from './device/';
+import * as DOM from './dom/';
+import * as Game from './Game';
+import * as Loader from './loader/';
+
+export {
+    Game,
+    Device,
+    DOM,
+    Loader
+};

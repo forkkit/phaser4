@@ -1,13 +1,25 @@
 //  @namespace Phaser.Device.Browser
 
-export { GetBrowser } from './GetBrowser';
-export { IDeviceBrowserResult } from './IDeviceBrowserResult';
-export { isChrome } from './isChrome';
-export { isEdge } from './isEdge';
-export { isFirefox } from './isFirefox';
-export { isMobileSafari } from './isMobileSafari';
-export { isMSIE } from './isMSIE';
-export { isOpera } from './isOpera';
-export { isSafari } from './isSafari';
-export { isSilk } from './isSilk';
-export { isTrident } from './isTrident';
+import { GetBrowser } from './GetBrowser';
+import { isChrome } from './isChrome';
+import { isEdge } from './isEdge';
+import { isFirefox } from './isFirefox';
+import { isMobileSafari } from './isMobileSafari';
+import { isMSIE } from './isMSIE';
+import { isOpera } from './isOpera';
+import { isSafari } from './isSafari';
+import { isSilk } from './isSilk';
+import { isTrident } from './isTrident';
+
+export {
+    GetBrowser,
+    isChrome,
+    isEdge,
+    isFirefox,
+    isMobileSafari,
+    isMSIE,
+    isOpera,
+    isSafari,
+    isSilk,
+    isTrident
+};
