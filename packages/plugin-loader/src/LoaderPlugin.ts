@@ -1,5 +1,5 @@
-// import { BaseLoader } from './BaseLoader';
-// import { ImageFile } from './filetypes/ImageFile';
+import { BaseLoader } from '@phaserjs/loader';
+import { ImageFile } from '@phaserjs/loader-filetypes';
 
 export class LoaderPlugin extends BaseLoader
 {
@@ -10,6 +10,6 @@ export class LoaderPlugin extends BaseLoader
 
     image (key: string, url: string = ''): Promise<any>
     {
-        // return this.addFile(ImageFile(key, url));
+        return this.addFile(ImageFile(key, url));
     }
 }
