@@ -1,4 +1,4 @@
-import { isCordova } from '../device/os/isCordova';
+import { OS } from '@phaserjs/device/';
 
 export function DOMContentLoaded (callback: () => void)
 {
@@ -22,7 +22,7 @@ export function DOMContentLoaded (callback: () => void)
     {
         window.setTimeout(check, 20);
     }
-    else if (isCordova())
+    else if (OS.isCordova())
     {
         document.addEventListener('deviceready', check, true);
     }
