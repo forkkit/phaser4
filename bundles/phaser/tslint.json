@@ -26,7 +26,8 @@
         "semicolon": [ true, "always" ],
         "no-namespace": false,
         "no-string-literal": false,
-        "member-access": [ true, "no-public" ]
+        "member-access": [ true, "no-public" ],
+        "ordered-imports": false
     },
     "rulesDirectory": []
 }
