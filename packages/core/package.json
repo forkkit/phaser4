@@ -1,6 +1,6 @@
 {
   "name": "@phaserjs/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Phaser.Core",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,6 +25,6 @@
   },
   "gitHead": "5c3238c17d3fa8f8ef9ebb9305e0804996f6070d",
   "dependencies": {
-    "@phaserjs/dom": "^0.0.3"
+    "@phaserjs/dom": "^0.0.4"
   }
 }
