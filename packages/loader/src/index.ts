@@ -4,8 +4,8 @@ import { BaseLoader } from './BaseLoader';
 import { BaseLoaderState } from './BaseLoaderState';
 import { File } from './File';
 import { FileState } from './FileState';
-// import * as FileTypes from './filetypes/';
-// import { LoaderPlugin } from './LoaderPlugin';
+import { IFile } from './IFile';
+import { IXHRSettings } from './IXHRSettings';
 import { XHRLoader } from './XHRLoader';
 import { XHRSettings } from './XHRSettings';
 
@@ -14,8 +14,8 @@ export {
     BaseLoaderState,
     File,
     FileState,
-    // LoaderPlugin,
+    IFile,
+    IXHRSettings,
     XHRLoader,
-    XHRSettings,
-    // FileTypes
+    XHRSettings
 };
