@@ -1,5 +1,3 @@
-import { Contains } from './Contains';
-
 export class Circle
 {
     x: number;
@@ -13,11 +11,6 @@ export class Circle
     constructor (x: number = 0, y: number = 0, radius: number = 0)
     {
         this.setTo(x, y, radius);
-    }
-
-    contains (x: number, y: number): boolean
-    {
-        return Contains(this, x, y);
     }
 
     setTo (x: number, y: number, radius: number): Circle

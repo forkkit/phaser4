@@ -1,3 +1,4 @@
 import { Circle } from './Circle';
-export declare function Clone(source: Circle): Circle;
+import { ICircle } from './ICircle';
+export declare function Clone<T extends ICircle>(source: T): Circle;
 //# sourceMappingURL=Clone.d.ts.map

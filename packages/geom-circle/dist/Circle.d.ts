@@ -4,7 +4,6 @@ export declare class Circle {
     private _radius;
     private _diameter;
     constructor(x?: number, y?: number, radius?: number);
-    contains(x: number, y: number): boolean;
     setTo(x: number, y: number, radius: number): Circle;
     setEmpty(): Circle;
     setPosition(x: number, y?: number): Circle;

@@ -5,6 +5,7 @@ import * as Clone from './Clone';
 import * as Contains from './Contains';
 import * as CopyFrom from './CopyFrom';
 import * as Equals from './Equals';
+import * as ICircle from './ICircle';
 import * as Translate from './Translate';
 
 export {
@@ -15,5 +16,6 @@ export {
     Contains,
     CopyFrom,
     Equals,
+    ICircle,
     Translate
-}
+};

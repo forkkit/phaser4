@@ -1,6 +1,6 @@
-import { Circle } from './Circle';
+import { ICircle } from './ICircle';
 
-export function Translate (circle: Circle, x: number, y: number): Circle
+export function Translate <T extends ICircle> (circle: T, x: number, y: number): T
 {
     circle.x += x;
     circle.y += y;

@@ -1,1 +1,1 @@
-{"version":3,"file":"Clone.d.ts","sourceRoot":"","sources":["../src/Clone.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,UAAU,CAAC;AAElC,wBAAgB,KAAK,CAAE,MAAM,EAAE,MAAM,GAAG,MAAM,CAG7C"}
+{"version":3,"file":"Clone.d.ts","sourceRoot":"","sources":["../src/Clone.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,UAAU,CAAC;AAClC,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAEpC,wBAAgB,KAAK,CAAE,CAAC,SAAS,OAAO,EAAG,MAAM,EAAE,CAAC,GAAG,MAAM,CAG5D"}

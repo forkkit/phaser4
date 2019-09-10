@@ -1,3 +1,3 @@
-import { Circle } from './Circle';
-export declare function Equals(source: Circle, target: Circle): boolean;
+import { ICircle } from './ICircle';
+export declare function Equals<T extends ICircle>(source: T, target: T): boolean;
 //# sourceMappingURL=Equals.d.ts.map

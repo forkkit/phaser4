@@ -5,6 +5,7 @@ import * as Clone from './Clone';
 import * as Contains from './Contains';
 import * as CopyFrom from './CopyFrom';
 import * as Equals from './Equals';
+import * as ICircle from './ICircle';
 import * as Translate from './Translate';
-export { Area, Circle, Circumference, Clone, Contains, CopyFrom, Equals, Translate };
+export { Area, Circle, Circumference, Clone, Contains, CopyFrom, Equals, ICircle, Translate };
 //# sourceMappingURL=index.d.ts.map

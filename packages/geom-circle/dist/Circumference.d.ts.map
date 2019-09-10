@@ -1,1 +1,1 @@
-{"version":3,"file":"Circumference.d.ts","sourceRoot":"","sources":["../src/Circumference.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,UAAU,CAAC;AAElC,wBAAgB,aAAa,CAAE,MAAM,EAAE,MAAM,GAAG,MAAM,CAGrD"}
+{"version":3,"file":"Circumference.d.ts","sourceRoot":"","sources":["../src/Circumference.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAEpC,wBAAgB,aAAa,CAAE,CAAC,SAAS,OAAO,EAAG,MAAM,EAAE,CAAC,GAAG,MAAM,CAGpE"}
