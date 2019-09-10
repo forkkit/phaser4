@@ -1,4 +1,5 @@
-export interface IXHRSettings {
+export interface IXHRSettings
+{
     responseType: XMLHttpRequestResponseType;
     async: boolean;
     username: string;
