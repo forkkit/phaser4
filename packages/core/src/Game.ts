@@ -1,5 +1,4 @@
-import { AddToDOM } from './dom/AddToDOM';
-import { DOMContentLoaded } from './dom/DOMContentLoaded';
+import { AddToDOM, DOMContentLoaded } from '@phaserjs/dom';
 
 export class Game
 {
