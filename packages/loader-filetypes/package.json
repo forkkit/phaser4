@@ -1,6 +1,6 @@
 {
   "name": "@phaserjs/loader-filetypes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Phaser.Loader.FileTypes",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,6 +22,6 @@
   },
   "gitHead": "5c3238c17d3fa8f8ef9ebb9305e0804996f6070d",
   "dependencies": {
-    "@phaserjs/loader": "0.0.1"
+    "@phaserjs/loader": "^0.0.2"
   }
 }
