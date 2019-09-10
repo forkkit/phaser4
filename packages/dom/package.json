@@ -1,6 +1,6 @@
 {
-  "name": "@phaser4/dom",
-  "version": "1.0.1",
+  "name": "@phaserjs/dom",
+  "version": "0.0.0",
   "description": "Phaser.DOM",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,5 +19,6 @@
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "devDependencies": {
     "typescript": "^3.6.2"
-  }
+  },
+  "gitHead": "5c3238c17d3fa8f8ef9ebb9305e0804996f6070d"
 }
