@@ -1,0 +1,1 @@
+{"version":3,"file":"isOpera.js","sourceRoot":"","sources":["../../src/browser/isOpera.ts"],"names":[],"mappings":"AAAA,MAAM,UAAU,OAAO;IAEnB,MAAM,KAAK,GAAG,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,SAAS,CAAC,SAAS,CAAC,CAAC;IAElD,OAAO;QACH,KAAK;KACR,CAAC;AACN,CAAC"}

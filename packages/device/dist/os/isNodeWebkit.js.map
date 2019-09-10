@@ -1,0 +1,1 @@
+{"version":3,"file":"isNodeWebkit.js","sourceRoot":"","sources":["../../src/os/isNodeWebkit.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,UAAU,CAAC;AAElC,MAAM,UAAU,YAAY;IAExB,OAAO,CAAC,MAAM,EAAE,IAAI,CAAC,CAAC,OAAO,CAAC,QAAQ,CAAC,aAAa,CAAC,CAAC,CAAC;AAC3D,CAAC"}

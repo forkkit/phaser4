@@ -1,1 +1,0 @@
-{"version":3,"file":"canPlayOpus.js","sourceRoot":"","sources":["../../../../src/device/audio/canPlayOpus.ts"],"names":[],"mappings":"AAAA,MAAM,UAAU,WAAW,CAAE,eAAiC,QAAQ,CAAC,aAAa,CAAC,OAAO,CAAC;IAEzF,OAAO,CAAC,CAAC,YAAY,CAAC,WAAW,CAAC,0BAA0B,CAAC,KAAK,EAAE,CAAC,IAAI,CAAC,YAAY,CAAC,WAAW,CAAC,2BAA2B,CAAC,KAAK,EAAE,CAAC,CAAC,CAAC;AAC7I,CAAC"}

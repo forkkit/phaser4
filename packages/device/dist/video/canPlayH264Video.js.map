@@ -1,0 +1,1 @@
+{"version":3,"file":"canPlayH264Video.js","sourceRoot":"","sources":["../../src/video/canPlayH264Video.ts"],"names":[],"mappings":"AAAA,MAAM,UAAU,gBAAgB,CAAE,eAAiC,QAAQ,CAAC,aAAa,CAAC,OAAO,CAAC;IAE9F,OAAO,CAAC,YAAY,CAAC,WAAW,CAAC,iCAAiC,CAAC,KAAK,EAAE,CAAC,CAAC;AAChF,CAAC"}
