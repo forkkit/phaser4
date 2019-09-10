@@ -1,6 +1,6 @@
 {
   "name": "@phaserjs/plugin-loader",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Phaser.Loader.LoaderPlugin",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,8 +18,8 @@
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "dependencies": {
-    "@phaserjs/loader": "^0.0.3",
-    "@phaserjs/loader-filetypes": "^0.0.3",
+    "@phaserjs/loader": "^0.0.4",
+    "@phaserjs/loader-filetypes": "^0.0.4",
     "typescript": "^3.6.2"
   }
 }
