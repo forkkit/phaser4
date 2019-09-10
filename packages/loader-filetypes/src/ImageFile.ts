@@ -1,5 +1,4 @@
-import { File, IFile } from '../File';
-import { FileState } from '../FileState';
+import { File, FileState, IFile } from '@phaserjs/loader';
 
 export function ImageFile (key: string, url?: string): IFile
 {
