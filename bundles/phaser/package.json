@@ -1,0 +1,29 @@
+{
+  "name": "@phaserjs/phaser",
+  "version": "0.0.0",
+  "description": "Phaser Bundle",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build tsconfig.json"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phaserjs/phaser4.git"
+  },
+  "author": "Richard Davey <rich@photonstorm.com> (http://www.photonstorm.com)",
+  "license": "MIT",
+  "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
+  "dependencies": {
+    "@phaserjs/core": "0.0.1",
+    "@phaserjs/device": "0.0.2",
+    "@phaserjs/dom": "0.0.2",
+    "@phaserjs/loader": "0.0.4",
+    "@phaserjs/loader-filetypes": "0.0.4",
+    "@phaserjs/plugin-loader": "0.0.2",
+    "typescript": "^3.6.2"
+  }
+}
