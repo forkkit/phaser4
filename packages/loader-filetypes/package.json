@@ -1,6 +1,6 @@
 {
   "name": "@phaser4/loader-filetypes",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Phaser.Loader.FileTypes",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
