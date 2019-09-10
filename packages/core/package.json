@@ -4,6 +4,9 @@
   "description": "Phaser.Core",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc --build tsconfig.json"
   },
