@@ -1,6 +1,6 @@
 {
   "name": "@phaserjs/phaser",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Phaser Bundle",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,12 +21,12 @@
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "dependencies": {
-    "@phaserjs/core": "0.0.1",
-    "@phaserjs/device": "0.0.2",
-    "@phaserjs/dom": "0.0.2",
-    "@phaserjs/loader": "0.0.4",
-    "@phaserjs/loader-filetypes": "0.0.4",
-    "@phaserjs/plugin-loader": "0.0.2",
+    "@phaserjs/core": "^0.0.2",
+    "@phaserjs/device": "^0.0.3",
+    "@phaserjs/dom": "^0.0.3",
+    "@phaserjs/loader": "^0.0.5",
+    "@phaserjs/loader-filetypes": "^0.0.5",
+    "@phaserjs/plugin-loader": "^0.0.3",
     "typescript": "^3.6.2"
   }
 }
