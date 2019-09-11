@@ -1,6 +1,6 @@
 {
   "name": "@phaserjs/geom-circle",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Phaser.Geom.Circle",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
