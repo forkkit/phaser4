@@ -1,5 +1,5 @@
 import * as Area from './Area';
-import * as Circle from './Circle';
+import { Circle } from './Circle';
 import * as Circumference from './Circumference';
 import * as Clone from './Clone';
 import * as Contains from './Contains';
